@@ -1,5 +1,5 @@
 
-# ilab-template-python-data-science/docs directory
+# swot-dashboard/docs directory
 
 Template for python projects tailored to scientific applications (e.g., machine learning) - docs directory
 

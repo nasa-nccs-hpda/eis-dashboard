@@ -1,9 +1,9 @@
 ---
-title: ILAB TEMPLATE - Data Science
-purpose: Template for python projects tailored to scientific applications (e.g., machine learning)
+title: SWOT Dashboard
+purpose: AWS-based dashboard
 ---
 
-# ilab-template-python-data-science
+# SWOT Dashboard
 
 Template for python projects tailored to scientific applications (e.g., machine learning)
 

@@ -1,0 +1,14 @@
+data:
+  default:
+    - 'BCSMASS'
+    - 'DUEXTTAU'
+  datasets:
+    - 'BCSMASS'
+    - 'DUEXTTAU'
+    - 'SSCMASS'
+    - 'SUFLUXU'
+    - 'SUSCATAU'
+
+title:
+  title: '# EIS Test Dashboard'
+  subtitle: '## EIS test subtitle'

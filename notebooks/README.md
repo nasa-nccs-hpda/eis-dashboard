@@ -1,5 +1,5 @@
 
-# ilab-template-python-data-science/notebooks directory
+# swot-dashboard/notebooks directory
 
 Template for python projects tailored to scientific applications (e.g., machine learning) - notebooks directory
 
