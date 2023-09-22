@@ -1,3 +1,6 @@
+import datetime
+from typing import Tuple
+
 import panel as pn
 
 
@@ -23,12 +26,19 @@ class InteractivityManager(object):
     TIME_AVE_CSV_TOGGLE_NAME: str = 'Export to time series to CSV'
     TIME_AVE_CSV_TOGGLE_BUTTON_TYPE: str = 'success'
 
+    DATE_TIME_RANGE_PICKER_NAME: str = 'Date-Time Range'
+    DATE_TIME_RANGE_PICKER_DEF_VALUE: \
+        Tuple[datetime.datetime, datetime.datetime] = (
+            datetime.datetime(2023, 3, 1, 0, 0),
+            datetime.datetime(2023, 3, 31, 12, 59)
+        )
+
+    # ------------------------------------------------------------------------
+    # __init__
+    # ------------------------------------------------------------------------
     def __init__(self, conf) -> None:
 
         self._conf = conf
-
-        default_datasets = list(self._conf.data.default)
-        additional_datasets = list(self._conf.data.datasets)
 
         # Widgets
         self._layerSelectionWidget = pn.widgets.RadioButtonGroup(
@@ -39,8 +49,8 @@ class InteractivityManager(object):
 
         self._timeSeriesVariablesWidget = pn.widgets.MultiChoice(
             name=self.TIME_SERIES_NAME,
-            value=default_datasets,
-            options=additional_datasets)
+            value=[],
+            options=[])
 
         self._timeAveragedSequentialRadioWidget = \
             pn.widgets.RadioButtonGroup(
@@ -63,30 +73,57 @@ class InteractivityManager(object):
             name=self.TIME_AVE_CSV_TOGGLE_NAME,
             button_type=self.TIME_AVE_CSV_TOGGLE_BUTTON_TYPE)
 
+        self._dateTimeRangeWidget = pn.widgets.DatetimeRangePicker(
+            name=self.DATE_TIME_RANGE_PICKER_NAME,
+            value=self.DATE_TIME_RANGE_PICKER_DEF_VALUE,
+        )
+
         self._timeAveragedSequentialRadioWidget.link(
             self._timeStepInputWidget,
             callbacks={
                 'value': self._timeAveragedCallBack})
 
+    # ------------------------------------------------------------------------
+    # layerSelection
+    # ------------------------------------------------------------------------
     @property
     def layerSelection(self):
         return self._layerSelectionWidget
 
+    # ------------------------------------------------------------------------
+    # timeSeriesVariableWidget
+    # ------------------------------------------------------------------------
     @property
     def timeSeriesVariableWidget(self):
         return self._timeSeriesVariablesWidget
 
+    # ------------------------------------------------------------------------
+    # timeAveragedSequentialRadioWidget
+    # ------------------------------------------------------------------------
     @property
     def timeAveragedSequentialRadioWidget(self):
         return self._timeAveragedSequentialRadioWidget
 
+    # ------------------------------------------------------------------------
+    # timeStepInputWidget
+    # ------------------------------------------------------------------------
     @property
     def timeStepInputWidget(self):
         return self._timeStepInputWidget
 
+    # ------------------------------------------------------------------------
+    # toggleCSVExportWidget
+    # ------------------------------------------------------------------------
     @property
     def toggleCSVExportWidget(self):
         return self._toggleCSVExportWidget
+
+    # ------------------------------------------------------------------------
+    # dateTimeRangeWidget
+    # ------------------------------------------------------------------------
+    @property
+    def dateTimeRangeWidget(self):
+        return self._dateTimeRangeWidget
 
     # ------------------------------------------------------------------------
     # timeAveragedCallBack

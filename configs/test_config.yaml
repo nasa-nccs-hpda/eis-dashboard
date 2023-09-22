@@ -9,6 +9,18 @@ data:
     - 'SUFLUXU'
     - 'SUSCATAU'
 
+collections:
+  ids:
+    - 'GLDAS_NOAH025_3H'
+
+bounds:
+  -  [-76.6, 38.8, -76.5, 38.9]
+
+# Must be in YYYY-MM-DD
+time_bounds:
+  start: '2019-05-18'
+  end: '2019-06-18'
+
 title:
   title: '# EIS Test Dashboard'
   subtitle: '## EIS test subtitle'
