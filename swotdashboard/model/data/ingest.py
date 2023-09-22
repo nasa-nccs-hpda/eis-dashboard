@@ -51,7 +51,7 @@ class Ingest(object):
         resultList, providerID = cmrP.run()
 
         st = time.time()
-        data = self.ingest_dummy(providerID, resultList)
+        data = self.ingest(providerID, resultList)
         et = time.time()
         print(f'Time to get data: {et-st}')
         # print(data.variables)
