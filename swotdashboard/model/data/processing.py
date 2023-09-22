@@ -1,6 +1,3 @@
-import xarray as xr
-
-
 # -----------------------------------------------------------------------------
 # Preprocessing
 # -----------------------------------------------------------------------------
@@ -15,7 +12,6 @@ class Preprocessing:
     # ------------------------------------------------------------------------
     def preprocess(self):
         processed_data = {}
-        names_and_paths = zip(self.config.data.paths, self.config.data.names)
         for dataset_name, subdatasets in self.config.data.paths:
             if dataset_name not in self.datasets:
                 raise ValueError(f"Dataset '{dataset_name}' not found.")
@@ -23,10 +19,11 @@ class Preprocessing:
             dataset = self.datasets[dataset_name]
             processed_subdatasets = {}
 
-            for subdataset_name, resample_frequency in subdatasets.items():
+            for subdataset_name, _ in subdatasets.items():
                 if subdataset_name not in dataset:
                     raise ValueError(
-                        f"Subdataset '{subdataset_name}' not found in '{dataset_name}'.")
+                        f"Subdataset '{subdataset_name}' not found in " +
+                        f"'{dataset_name}'.")
 
                 subdataset = dataset[subdataset_name]
                 resampled_data = subdataset.resample(

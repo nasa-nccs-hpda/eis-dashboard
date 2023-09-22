@@ -40,4 +40,3 @@ class Config:
     bounds: List[list] = field(default_factory=lambda: [])
 
     time_bounds: TimeBounds = field(default_factory=TimeBounds)
-

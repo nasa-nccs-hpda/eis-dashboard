@@ -182,13 +182,9 @@ if __name__ == '__main__':
     import shapely
     from shapely.geometry import Polygon
     import datetime
-    import sys
+
     # END DEV ONLY
     config = read_config('swot-dashboard/configs/test_config.yaml')
-    print(config)
-    print(type(config.bounds))
-
-    sys.exit()
 
     date_beginning = datetime.datetime(2019, 5, 18)
     date_end = datetime.datetime(2019, 6, 18)
@@ -233,7 +229,6 @@ if __name__ == '__main__':
     ingest = Ingest(config)
 
     print(ingest)
-    import time
 
     print("attempt 1")
     st = time.time()
