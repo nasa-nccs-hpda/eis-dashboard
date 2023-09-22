@@ -40,3 +40,7 @@ class Config:
     bounds: List[list] = field(default_factory=lambda: [])
 
     time_bounds: TimeBounds = field(default_factory=TimeBounds)
+
+    log_level: str = 'INFO'
+
+    log_dir: str = ''

@@ -58,6 +58,8 @@ class PointDashBoard(Dashboard):
         ret = '## Point Selected: ({}, {})'.format(
             round(lat, 4), round(lon, 4))
 
+        self._logger.debug(f'Setting title to: {ret}')
+
         return pn.pane.Markdown(ret, width=400)
 
     # -------------------------------------------------------------------------
@@ -65,6 +67,9 @@ class PointDashBoard(Dashboard):
     # -------------------------------------------------------------------------
     def generateTimeSeriesGrid(self, timeSeriesList, timeAveraged,
                                step, exportToCSV, dateRange):
+
+        self._logger.debug('Generating new time series from options:')
+        self._logger.debug(timeSeriesList)
 
         timeAve = True if timeAveraged == 'Time Averaged' else False
 
@@ -129,18 +134,40 @@ class PointDashBoard(Dashboard):
         Defines and initializes streams, panel compenents
         that need to be defined closest to user invocation.
         """
+        self._logger.debug('Setting streams and binds')
         self.setStreamsAndBinds()
 
         # Partial dashboard initializations.
         title, subtitle = self.getTitles()
         titleRow = pn.Row(pn.Column(title, subtitle))
 
-        self.timeSeriesColumn = pn.Column(self.generateTimeSeriesGrid(
-            self._interactivityManager.timeSeriesVariableWidget.value,
-            self._interactivityManager.timeAveragedSequentialRadioWidget.value,
-            self._interactivityManager.timeStepInputWidget.value,
-            self._interactivityManager.toggleCSVExportWidget.value,
-            self._interactivityManager.dateTimeRangeWidget.value))
+        errorRow = pn.Row(
+            self._interactivityManager.exceptionCommWidget,
+        )
+
+        try:
+
+            timeSeriesGrid = self.generateTimeSeriesGrid(
+                self._interactivityManager.timeSeriesVariableWidget.value,
+                self._interactivityManager.timeAveragedSequentialRadioWidget.
+                value,
+                self._interactivityManager.timeStepInputWidget.value,
+                self._interactivityManager.toggleCSVExportWidget.value,
+                self._interactivityManager.dateTimeRangeWidget.value)
+
+        except Exception as exceptionCaptured:
+
+            step = 'Initial generation of the time series grid'
+
+            self.exeptionHandler(exceptionCaptured, step)
+
+            # ---
+            # Panel will accept a none-type object when put in a panel
+            # organizational object such as column, row, etc.
+            # ---
+            timeSeriesGrid = None
+
+        self.timeSeriesColumn = pn.Column(timeSeriesGrid)
 
         self.setWatchers()
 
@@ -155,6 +182,7 @@ class PointDashBoard(Dashboard):
 
         lowerRow = pn.Row(widgetBox, baseMapTimeSeries)
         dashboard = pn.Column(titleRow,
+                              errorRow,
                               lowerRow,
                               background='WhiteSmoke')
 

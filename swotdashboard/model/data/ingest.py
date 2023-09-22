@@ -2,6 +2,7 @@ from swotdashboard.model.cmr_query import CmrProcess
 from swotdashboard.model.common import read_config
 
 from functools import lru_cache
+import logging
 
 import requests
 import s3fs
@@ -31,8 +32,6 @@ class Ingest(object):
 
         self.config = config
 
-        # self.s3 = s3fs.S3FileSystem(anon=True)
-
     # -------------------------------------------------------------------------
     # get_data_from_bounds
     # -------------------------------------------------------------------------
@@ -53,8 +52,7 @@ class Ingest(object):
         st = time.time()
         data = self.ingest(providerID, resultList)
         et = time.time()
-        print(f'Time to get data: {et-st}')
-        # print(data.variables)
+        logging.info(f'Time to get data: {et-st}')
 
         return_dict = {'key': search_dict['collection_id'],
                        'data': data,
@@ -78,8 +76,6 @@ class Ingest(object):
 
         requestUrl = self.PROVIDER_CREDENTIAL_ENDPOINT[provider]
 
-        print(requestUrl)
-
         try:
 
             requestResultPackage = requests.get(requestUrl)
@@ -95,9 +91,13 @@ class Ingest(object):
 
             self._error = True
 
+            logging.error(msg)
+
             return 0, None
 
         temporaryS3Credentials = requestResultPackage.json()
+
+        logging.debug(temporaryS3Credentials)
 
         return temporaryS3Credentials
 
@@ -134,14 +134,14 @@ class Ingest(object):
 
             except Exception as e:
 
-                print(f'Error opening {s3_file_path} using these' +
-                      f' credentials {temp_s3_creds} for this' +
-                      f' DAAC: {provider_id}: {e}')
+                logging.error(f'Error opening {s3_file_path} using these' +
+                              f' credentials {temp_s3_creds} for this' +
+                              f' DAAC: {provider_id}: {e}')
 
         if len(s3_file_objects) == 0:
 
-            print(f'No data returned from s3paths: {s3_list} from' +
-                  f'this provider: {provider_id}')
+            logging.error(f'No data returned from s3paths: {s3_list} from' +
+                          f'this provider: {provider_id}')
 
             return None
 
@@ -152,7 +152,7 @@ class Ingest(object):
     # ------------------------------------------------------------------------
     # ingest
     # ------------------------------------------------------------------------
-    @lru_cache(maxsize=32)
+    # @lru_cache(maxsize=32)
     def ingest_dummy(self, provider_id: str, s3_list: list) -> xr.DataArray:
         """_summary_
 
@@ -169,9 +169,7 @@ class Ingest(object):
             'projects/swot-dashboard/data/merra')
         merra_files = merra_dir.glob('*.nc4')
 
-        ingested_data = xr.open_mfdataset(merra_files,
-                                          combine='by_coords').resample(
-                                              time='1D').mean()
+        ingested_data = xr.open_mfdataset(merra_files)
 
         return ingested_data
 

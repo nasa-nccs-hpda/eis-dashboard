@@ -26,6 +26,9 @@ class InteractivityManager(object):
     TIME_AVE_CSV_TOGGLE_NAME: str = 'Export to time series to CSV'
     TIME_AVE_CSV_TOGGLE_BUTTON_TYPE: str = 'success'
 
+    EXCEPTION_COMM_NAME: str = ''
+    EXCEPTION_COMM_VAL: str = ''
+
     DATE_TIME_RANGE_PICKER_NAME: str = 'Date-Time Range'
     DATE_TIME_RANGE_PICKER_DEF_VALUE: \
         Tuple[datetime.datetime, datetime.datetime] = (
@@ -78,6 +81,10 @@ class InteractivityManager(object):
             value=self.DATE_TIME_RANGE_PICKER_DEF_VALUE,
         )
 
+        self._exceptionCommWidget = pn.pane.Markdown(
+            self.EXCEPTION_COMM_VAL,
+            width=400)
+
         self._timeAveragedSequentialRadioWidget.link(
             self._timeStepInputWidget,
             callbacks={
@@ -124,6 +131,13 @@ class InteractivityManager(object):
     @property
     def dateTimeRangeWidget(self):
         return self._dateTimeRangeWidget
+
+    # ------------------------------------------------------------------------
+    # dateTimeRangeWidget
+    # ------------------------------------------------------------------------
+    @property
+    def exceptionCommWidget(self):
+        return self._exceptionCommWidget
 
     # ------------------------------------------------------------------------
     # timeAveragedCallBack

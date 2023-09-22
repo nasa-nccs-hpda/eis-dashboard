@@ -1,5 +1,5 @@
 import json
-import warnings
+import logging
 
 import certifi
 import urllib3
@@ -56,7 +56,7 @@ class CmrProcess(object):
     # relevant matches.
     # -------------------------------------------------------------------------
     def run(self):
-        print('Starting query')
+        logging.debug('Starting query')
         fileUrlsSet = set()
         providerID = None
         for pageIdx in range(self._maxPages):
@@ -65,11 +65,13 @@ class CmrProcess(object):
 
             returnDict, error = self._cmrQuery(pageNum=pageNumber)
 
+            logging.debug(returnDict)
+
             if error and pageIdx > 1:
                 return sorted(list(fileUrlsSet))
 
             if not error:
-                print('Results found on page: {}'.format(pageNumber))
+                logging.debug('Results found on page: {}'.format(pageNumber))
                 returnDicts = list(returnDict.values())
                 out = [r['file_url'] for r in returnDicts]
                 providerID = returnDicts[0]['provider_id']
@@ -98,7 +100,8 @@ class CmrProcess(object):
             return None, self._error
 
         if totalHits <= 0:
-            print('No hits on page number: {}, ending search.'.format(pageNum))
+            logging.error('No hits on page number: ' +
+                          '{}, ending search.'.format(pageNum))
             # warnings.warn(msg)
             return None, True
 
@@ -106,7 +109,7 @@ class CmrProcess(object):
             resultDictionaryProcessed = self._processRequest(resultDictionary)
 
         except KeyError as ke:
-            warnings.warn('Error processing returned request dict from ' +
+            logging.error('Error processing returned request dict from ' +
                           f'CMR. Error: {ke}')
             self._error = True
             return None, True
@@ -129,6 +132,7 @@ class CmrProcess(object):
         requestDict['day_night_flag'] = self._dayNightFlag
         requestDict['temporal'] = self._dateTime
         requestDict['online_only'] = self._onlineOnly
+        logging.debug(requestDict)
         return requestDict
 
     # -------------------------------------------------------------------------
@@ -142,7 +146,7 @@ class CmrProcess(object):
                                  ca_certs=certifi.where()) as httpPoolManager:
             encodedParameters = urlencode(requestDictionary, doseq=True)
             requestUrl = self.CMR_BASE_URL + encodedParameters
-            print(requestUrl)
+            logging.debug(requestUrl)
             try:
                 requestResultPackage = httpPoolManager.request('GET',
                                                                requestUrl)
@@ -162,7 +166,7 @@ class CmrProcess(object):
                 msg = 'CMR Query: Client or server error: ' + \
                     'Status: {}, Request URL: {}, Params: {}'.format(
                         str(status), requestUrl, encodedParameters)
-                warnings.warn(msg)
+                logging.error(msg)
                 return 0, None
 
     # -------------------------------------------------------------------------

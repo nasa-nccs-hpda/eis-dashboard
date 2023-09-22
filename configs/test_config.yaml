@@ -22,5 +22,9 @@ time_bounds:
   end: '2019-06-18'
 
 title:
-  title: '# EIS Test Dashboard'
-  subtitle: '## EIS test subtitle'
+  title: '# EIS General Dashboard'
+  subtitle: '## Alpha version: 0.2.0'
+
+# MUST BE 'INFO', 'WARN', 'DEBUG'
+log_level: 'DEBUG'
+log_dir: '.'

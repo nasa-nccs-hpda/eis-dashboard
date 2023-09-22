@@ -3,7 +3,10 @@ from swotdashboard.model.data.ingest import Ingest
 from swotdashboard.model.interactivity import InteractivityManager
 from swotdashboard.model.common import read_config
 
+import datetime
 from typing import Tuple
+import logging
+import os
 
 from ipyleaflet import Map, basemaps
 import ipywidgets as widgets
@@ -37,6 +40,8 @@ class Dashboard(object):
     def __init__(self, config_file):
 
         self._conf = read_config(config_file)
+
+        self._logger = self.initializeLogging()
 
         self._start_date = self._conf['time_bounds']['start']
         self._end_date = self._conf['time_bounds']['end']
@@ -73,22 +78,57 @@ class Dashboard(object):
             self._variableOptions
 
     # ------------------------------------------------------------------------
+    # initializeLogging
+    # ------------------------------------------------------------------------
+    def initializeLogging(self):
+
+        log_dir = self._conf['log_dir']
+        os.makedirs(log_dir, exist_ok=True)
+
+        formatter = logging.Formatter(
+            '%(asctime)s-%(levelname)s-%(module)s:%(lineno)d-%(message)s')
+
+        # Create a logger with the specified log_level
+        log_level = getattr(logging, self._conf['log_level'].upper())
+        logger = logging.getLogger()
+        logger.setLevel(log_level)
+
+        # Create a console handler
+        ch = logging.StreamHandler()
+        ch.setLevel(log_level)
+        ch.setFormatter(formatter)
+
+        log_dt_str = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        log_filename = os.path.join(
+            log_dir,
+            f'eis-dashboard-log-{log_dt_str}.log')
+        fh = logging.FileHandler(log_filename)
+        fh.setLevel(log_level)
+        fh.setFormatter(formatter)
+
+        # Add the handler to the logger
+        logger.addHandler(ch)
+        logger.addHandler(fh)
+
+        return logger
+
+    # ------------------------------------------------------------------------
     # initializeData
     # ------------------------------------------------------------------------
     def initializeData(self):
+        self._logger.debug('Initializing data')
 
         boundingBox: list = self._bounds
         collectionIDs = list(self._conf['collections']['ids'])
         dateRange = (self._start_date, self._end_date)
 
-        print(type(boundingBox[0]))
-        print(collectionIDs)
+        self._logger.debug(collectionIDs)
 
         queryPackages = dashboard_utils.makeAllQueryPackages(collectionIDs,
                                                              dateRange,
                                                              boundingBox)
 
-        print(queryPackages)
+        self._logger.debug(queryPackages)
 
         for queryPackage in queryPackages:
 
@@ -99,13 +139,15 @@ class Dashboard(object):
             self._datasetsVariables[dataPackage['key']] = \
                 dataPackage['variables']
 
-        print(self._datasetsVariables)
+        self._logger.debug(self._datasetsVariables)
 
     # ------------------------------------------------------------------------
     # initializeVariableOptions
     # ------------------------------------------------------------------------
     def initializeVariableOptions(self):
         # TODO: map this later, this is not the most efficient
+
+        self._logger.debug('Initializing variable options')
         allOptions: list = []
 
         for key in self._datasetsVariables.keys():
@@ -118,7 +160,7 @@ class Dashboard(object):
 
                 allOptions.append(variableOptionStr)
 
-        print(allOptions)
+        self._logger.debug(allOptions)
         return allOptions
 
     # ------------------------------------------------------------------------
@@ -126,6 +168,7 @@ class Dashboard(object):
     # ------------------------------------------------------------------------
     def parseVariableOption(self, variableOption: str):
         # Called by the updateTimeSeries Function
+        self._logger.debug('Parsing variables and collectionID')
 
         collectionID, variableName = variableOption.split(':')
 
@@ -135,6 +178,7 @@ class Dashboard(object):
     # getTitles
     # ------------------------------------------------------------------------
     def getTitles(self) -> Tuple[pn.pane.Markdown, pn.pane.Markdown]:
+        self._logger.debug('Getting titles')
 
         title = pn.pane.Markdown(self._conf.title.title,
                                  width=self.TITLE_WIDTH)
@@ -147,6 +191,7 @@ class Dashboard(object):
     # getWidgetBox
     # ------------------------------------------------------------------------
     def getWidgetBox(self):
+        self._logger.debug('Getting widget box')
 
         layerAccordion = self.getLayerAccordion(
             self._interactivityManager.layerSelection)
@@ -167,6 +212,8 @@ class Dashboard(object):
     # ------------------------------------------------------------------------
     def getLayerAccordion(self, layerSelectionWidget):
 
+        self._logger.debug('Getting layer accordion')
+
         layerAccordion = pn.Accordion(
             ('Basemap Type', layerSelectionWidget),
             header_background=self.HEADER_BG_COLOR,
@@ -178,8 +225,12 @@ class Dashboard(object):
     # getWidgetBox
     # ------------------------------------------------------------------------
     def getCenterOfBoundingBox(self):
+
         lons = self._bounds[::2]
         lats = self._bounds[1::2]
+
+        self._logger.debug(f'Computing center bounds given lons: {lons}, ' +
+                           f'lats: {lats}')
 
         lons_min = min(lons)
         lats_min = min(lats)
@@ -195,7 +246,7 @@ class Dashboard(object):
 
         center = (center_lats, center_lons)
 
-        print(center)
+        self._logger.debug(center)
 
         return center
 
@@ -203,6 +254,8 @@ class Dashboard(object):
     # getMap
     # ------------------------------------------------------------------------
     def getBaseMap(self):
+        self._logger.debug('Instantiating basemap, with center of ' +
+                           f'{self._centerBounds}, size: 400x400px')
 
         base = Map(
             center=self._centerBounds,
@@ -239,10 +292,33 @@ class Dashboard(object):
 
         pass
 
+    # ------------------------------------------------------------------------
+    # exeptionHandler
+    # ------------------------------------------------------------------------
+    def exeptionHandler(self, exception: Exception, step: str) -> None:
+        """Method that communicates to the user what exception was thrown
+        and what step it occured at. This should update a warning message
+        box in the dashboard view and return. The use case is that we don't
+        want to error out because there will be no way for the user to know.
+
+        Args:
+            exception (Exception): exception that was thrown
+            step (str): what step (e.g. updating time series)
+        """
+        msg = f'An error was encountered at step: {step}' + \
+            ' of this dashboard. Error was: ' + \
+            f' {exception}'
+
+        self._interactivityManager.exceptionCommWidget.object = \
+            f'<B>ERROR</b> {msg}'
+
+        self._logger.error(msg)
+
     # -------------------------------------------------------------------------
     # setWatchers
     # -------------------------------------------------------------------------
     def setWatchers(self):
+        self._logger.debug('Setting watchers; update time-series when changed')
 
         # Callback initializations.
         self._interactivityManager.timeSeriesVariableWidget.param.watch(
@@ -265,12 +341,14 @@ class Dashboard(object):
     # ------------------------------------------------------------------------
     def updateTimeSeries(self, event):
 
+        self._logger.debug('Updating time-series')
+
+        self._logger.debug('Freezing all widgets')
+
         timestepDisabledPreEvent = \
             self._interactivityManager.timeStepInputWidget.disabled
 
         self.timeSeriesColumn[0].loading = True
-
-        # self._interactivityManager.dateTimeRangeWidget.disabled = True
 
         self._interactivityManager.timeSeriesVariableWidget.disabled = True
 
@@ -282,15 +360,26 @@ class Dashboard(object):
         self._interactivityManager.dateTimeRangeWidget.disabled \
             = True
 
-        self.timeSeriesColumn[0] = self.generateTimeSeriesGrid(
-            self._interactivityManager.timeSeriesVariableWidget.value,
-            self._interactivityManager.timeAveragedSequentialRadioWidget.value,
-            self._interactivityManager.timeStepInputWidget.value,
-            self._interactivityManager.toggleCSVExportWidget.value,
-            self._interactivityManager.dateTimeRangeWidget.value)
+        try:
+            self.timeSeriesColumn[0] = self.generateTimeSeriesGrid(
+                self._interactivityManager.timeSeriesVariableWidget.value,
+                self._interactivityManager.timeAveragedSequentialRadioWidget.
+                value,
+                self._interactivityManager.timeStepInputWidget.value,
+                self._interactivityManager.toggleCSVExportWidget.value,
+                self._interactivityManager.dateTimeRangeWidget.value)
 
-        # self._interactivityManager.dateTimeRangeWidget.disabled = False
+        # ---
+        # This handles any error encountered from generateTimeSeriesGrid.
+        # we assume that the previous return of time series was fine
+        # so we will fall back to that. The user is not expected to move
+        # be able to fix it at the dashboard view.
+        # ---
+        except Exception as exceptionCaptured:
+            step = 'Updating the time series grid'
+            self.exeptionHandler(exceptionCaptured, step)
 
+        self._logger.debug('Completed update, unfreezing widgets')
         self._interactivityManager.timeSeriesVariableWidget.disabled = False
 
         self._interactivityManager.timeAveragedSequentialRadioWidget.disabled \
