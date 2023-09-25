@@ -66,21 +66,26 @@ class PointDashBoard(Dashboard):
     # generateTimeSeriesGrid
     # -------------------------------------------------------------------------
     def generateTimeSeriesGrid(self, timeSeriesList, timeAveraged,
-                               step, exportToCSV, dateRange):
+                               step, exportToCSV):
 
         self._logger.debug('Generating new time series from options:')
         self._logger.debug(timeSeriesList)
+        self.indicateStatus('Updating time-series')
 
         timeAve = True if timeAveraged == 'Time Averaged' else False
 
         ncols = self.NCOLS
         nrows = (len(timeSeriesList)//2)+1
 
+        numTimeSeries = len(timeSeriesList)
+
         totalCol = pn.Column()
 
         gBox = pn.GridBox(ncols=ncols, nrows=nrows)
 
-        for _, collectVariableOption in enumerate(timeSeriesList):
+        for i, collectVariableOption in enumerate(timeSeriesList):
+
+            self.indicateStatus(f'Adding time-series {i+1}/{numTimeSeries}')
 
             collectionID, variable = self.parseVariableOption(
                 collectVariableOption)
@@ -99,6 +104,11 @@ class PointDashBoard(Dashboard):
             ds = utils.plotTS(rasterTS,
                               PointDashBoard.clickStream.param.lat,
                               PointDashBoard.clickStream.param.lon)
+            
+            if exportToCSV:
+                self._logger.debug(f'Writing {collectVariableOption} to csv')
+                df_ds = ds.to_dataframe()
+                df_ds.to_csv(f'{collectionID}_{variable}.csv')
 
             addTimeSeriesPlot = ds.hvplot('time',
                                           color=color,
@@ -107,6 +117,8 @@ class PointDashBoard(Dashboard):
             gBox.append(addTimeSeriesPlot.dmap())
 
         totalCol.append(gBox)
+
+        self.indicateStatus('Finished adding time-series')
 
         return totalCol
 
@@ -145,6 +157,10 @@ class PointDashBoard(Dashboard):
             self._interactivityManager.exceptionCommWidget,
         )
 
+        statusRow = pn.Row(
+            self._interactivityManager.statusIndicatorWidget,
+        )
+
         try:
 
             timeSeriesGrid = self.generateTimeSeriesGrid(
@@ -152,8 +168,7 @@ class PointDashBoard(Dashboard):
                 self._interactivityManager.timeAveragedSequentialRadioWidget.
                 value,
                 self._interactivityManager.timeStepInputWidget.value,
-                self._interactivityManager.toggleCSVExportWidget.value,
-                self._interactivityManager.dateTimeRangeWidget.value)
+                self._interactivityManager.toggleCSVExportWidget.value)
 
         except Exception as exceptionCaptured:
 
@@ -183,6 +198,7 @@ class PointDashBoard(Dashboard):
         lowerRow = pn.Row(widgetBox, baseMapTimeSeries)
         dashboard = pn.Column(titleRow,
                               errorRow,
+                              statusRow,
                               lowerRow,
                               background='WhiteSmoke')
 

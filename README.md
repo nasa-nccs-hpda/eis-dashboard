@@ -1,32 +1,15 @@
 ---
-title: SWOT Dashboard
-purpose: AWS-based dashboard
+title: EIS Dashboard
+purpose: AWS-based dashboard for EIS projects
 ---
 
-# SWOT Dashboard
+# EIS Dashboard
 
 Template for python projects tailored to scientific applications (e.g., machine learning)
-
-## Objectives
-
-- Establish common structure for similar ILAB projects
-
-## Containers
-
-### TBD 
 
 ## Quickstart
 
 ### TBD
 
-## Dataset Generation and Training
-
-### TBD
-
-## Full Data Pipeline Command
-
-### TBD
-
 ## Contributors
-
-### TBD
+- NASA Data Science Group (606.3)

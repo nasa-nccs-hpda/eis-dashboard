@@ -39,6 +39,8 @@ class Ingest(object):
 
         search_dict = query_package
 
+        logging.info(f'Querying CMR for data links: {search_dict}')
+
         cmrP = CmrProcess(mission=search_dict['collection_id'],
                           dateTime=search_dict['datetime'],
                           lonLat=','.join(str(e)
@@ -49,10 +51,14 @@ class Ingest(object):
 
         resultList, providerID = cmrP.run()
 
+        logging.info('Ingesting data')
+
         st = time.time()
         data = self.ingest(providerID, resultList)
         et = time.time()
         logging.info(f'Time to get data: {et-st}')
+
+        logging.info('Done ingesting data')
 
         return_dict = {'key': search_dict['collection_id'],
                        'data': data,
@@ -126,6 +132,8 @@ class Ingest(object):
 
         for s3_file_path in s3_list:
 
+            logging.debug(f'Opening {s3_file_path}')
+
             try:
 
                 s3_file_object = s3FileSystem.open(s3_file_path)
@@ -144,6 +152,9 @@ class Ingest(object):
                           f'this provider: {provider_id}')
 
             return None
+
+        logging.info('Done opening s3 files, ' +
+                     'combining into single XR data-array.')
 
         ingested_data = xr.open_mfdataset(s3_file_objects, combine='by_coords')
 

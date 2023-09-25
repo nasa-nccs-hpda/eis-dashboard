@@ -153,8 +153,6 @@ def parseDate(dateString):
 # -------------------------------------------------------------------------
 def makeAllQueryPackages(collectionIDs: list, dateRange: tuple, coords: list):
 
-    print(collectionIDs)
-
     queryPackageForEachCollection = []
 
     for collection in collectionIDs:
@@ -175,11 +173,9 @@ def makeQueryPackage(dateRange: tuple, coords: list, collectionID: str):
 
     datetimeStr = f"{dateBegin.isoformat()}Z," + \
         f"{dateEnd.isoformat()}Z"
-    print(datetimeStr)
 
     queryPackage = {'spatialParameter': 'bounding_box',
                     'coords': coords,
                     'datetime': datetimeStr,
                     'collection_id': collectionID}
-    print(queryPackage)
     return queryPackage

@@ -193,15 +193,10 @@ class Dashboard(object):
     def getWidgetBox(self):
         self._logger.debug('Getting widget box')
 
-        layerAccordion = self.getLayerAccordion(
-            self._interactivityManager.layerSelection)
-
         widgetBox = pn.WidgetBox(
             self._interactivityManager.timeAveragedSequentialRadioWidget,
-            layerAccordion,
             self._interactivityManager.timeStepInputWidget,
             self._interactivityManager.timeSeriesVariableWidget,
-            self._interactivityManager.dateTimeRangeWidget,
             self._interactivityManager.toggleCSVExportWidget,
             height=self.WIDGET_BOX_HEIGHT)
 
@@ -314,6 +309,22 @@ class Dashboard(object):
 
         self._logger.error(msg)
 
+    # ------------------------------------------------------------------------
+    # indicateStatus
+    # ------------------------------------------------------------------------
+    def indicateStatus(self, step: str) -> None:
+        """Method that communicates to the user current status of the
+        dashboard.
+
+        Args:
+            step (str): what step (e.g. updating time series)
+        """
+
+        self._interactivityManager.statusIndicatorWidget.object = \
+            f'<B>Status:</b> {step}'
+
+        self._logger.debug(f'Updated status to :{step}')
+
     # -------------------------------------------------------------------------
     # setWatchers
     # -------------------------------------------------------------------------
@@ -333,17 +344,15 @@ class Dashboard(object):
         self._interactivityManager.toggleCSVExportWidget.param.watch(
             self.updateTimeSeries, 'value')
 
-        self._interactivityManager.dateTimeRangeWidget.param.watch(
-            self.updateTimeSeries, 'value')
-
     # ------------------------------------------------------------------------
     # updateTimeSeries
     # ------------------------------------------------------------------------
     def updateTimeSeries(self, event):
 
-        self._logger.debug('Updating time-series')
-
-        self._logger.debug('Freezing all widgets')
+        statusMsg = 'Updating time-series with selected options, ' + \
+            'freezing all widgets'
+        self._logger.debug(statusMsg)
+        self.indicateStatus(statusMsg)
 
         timestepDisabledPreEvent = \
             self._interactivityManager.timeStepInputWidget.disabled
@@ -357,17 +366,13 @@ class Dashboard(object):
         self._interactivityManager.timeAveragedSequentialRadioWidget.disabled \
             = True
 
-        self._interactivityManager.dateTimeRangeWidget.disabled \
-            = True
-
         try:
             self.timeSeriesColumn[0] = self.generateTimeSeriesGrid(
                 self._interactivityManager.timeSeriesVariableWidget.value,
                 self._interactivityManager.timeAveragedSequentialRadioWidget.
                 value,
                 self._interactivityManager.timeStepInputWidget.value,
-                self._interactivityManager.toggleCSVExportWidget.value,
-                self._interactivityManager.dateTimeRangeWidget.value)
+                self._interactivityManager.toggleCSVExportWidget.value)
 
         # ---
         # This handles any error encountered from generateTimeSeriesGrid.
@@ -379,7 +384,12 @@ class Dashboard(object):
             step = 'Updating the time series grid'
             self.exeptionHandler(exceptionCaptured, step)
 
-        self._logger.debug('Completed update, unfreezing widgets')
+        statusMsg = 'Completed update, unfreezing widgets'
+
+        self._logger.debug(statusMsg)
+
+        self.indicateStatus(statusMsg)
+
         self._interactivityManager.timeSeriesVariableWidget.disabled = False
 
         self._interactivityManager.timeAveragedSequentialRadioWidget.disabled \
@@ -389,6 +399,8 @@ class Dashboard(object):
             timestepDisabledPreEvent
 
         self.timeSeriesColumn[0].loading = False
+
+        self.indicateStatus('Idle')
 
 
 if __name__ == '__main__':

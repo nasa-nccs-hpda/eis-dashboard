@@ -1,6 +1,3 @@
-import datetime
-from typing import Tuple
-
 import panel as pn
 
 
@@ -8,11 +5,6 @@ import panel as pn
 # Interactivity
 # ------------------------------------------------------------------------
 class InteractivityManager(object):
-
-    BASEMAP_NAME: str = 'Base map layer'
-    BASEMAP_OPTS: list = ['OSM', 'ESRI']
-    BASEMAP_DEFAULT: str = 'ESRI'
-    BASEMAP_BUTTON_TYPE: str = 'success'
 
     TIME_SERIES_NAME: str = 'Time Series Variables'
     TIME_AVE_SEQ_RADIO_NAME: str = 'Visualization Type'
@@ -26,15 +18,9 @@ class InteractivityManager(object):
     TIME_AVE_CSV_TOGGLE_NAME: str = 'Export to time series to CSV'
     TIME_AVE_CSV_TOGGLE_BUTTON_TYPE: str = 'success'
 
-    EXCEPTION_COMM_NAME: str = ''
     EXCEPTION_COMM_VAL: str = ''
 
-    DATE_TIME_RANGE_PICKER_NAME: str = 'Date-Time Range'
-    DATE_TIME_RANGE_PICKER_DEF_VALUE: \
-        Tuple[datetime.datetime, datetime.datetime] = (
-            datetime.datetime(2023, 3, 1, 0, 0),
-            datetime.datetime(2023, 3, 31, 12, 59)
-        )
+    STATUS_INDICATOR_VAL: str = ''
 
     # ------------------------------------------------------------------------
     # __init__
@@ -44,12 +30,6 @@ class InteractivityManager(object):
         self._conf = conf
 
         # Widgets
-        self._layerSelectionWidget = pn.widgets.RadioButtonGroup(
-            name=self.BASEMAP_NAME,
-            options=self.BASEMAP_OPTS,
-            value=self.BASEMAP_DEFAULT,
-            button_type=self.BASEMAP_BUTTON_TYPE)
-
         self._timeSeriesVariablesWidget = pn.widgets.MultiChoice(
             name=self.TIME_SERIES_NAME,
             value=[],
@@ -76,26 +56,18 @@ class InteractivityManager(object):
             name=self.TIME_AVE_CSV_TOGGLE_NAME,
             button_type=self.TIME_AVE_CSV_TOGGLE_BUTTON_TYPE)
 
-        self._dateTimeRangeWidget = pn.widgets.DatetimeRangePicker(
-            name=self.DATE_TIME_RANGE_PICKER_NAME,
-            value=self.DATE_TIME_RANGE_PICKER_DEF_VALUE,
-        )
-
         self._exceptionCommWidget = pn.pane.Markdown(
             self.EXCEPTION_COMM_VAL,
+            width=400)
+
+        self._statusIndicatorWidget = pn.pane.Markdown(
+            self.STATUS_INDICATOR_VAL,
             width=400)
 
         self._timeAveragedSequentialRadioWidget.link(
             self._timeStepInputWidget,
             callbacks={
                 'value': self._timeAveragedCallBack})
-
-    # ------------------------------------------------------------------------
-    # layerSelection
-    # ------------------------------------------------------------------------
-    @property
-    def layerSelection(self):
-        return self._layerSelectionWidget
 
     # ------------------------------------------------------------------------
     # timeSeriesVariableWidget
@@ -126,18 +98,18 @@ class InteractivityManager(object):
         return self._toggleCSVExportWidget
 
     # ------------------------------------------------------------------------
-    # dateTimeRangeWidget
-    # ------------------------------------------------------------------------
-    @property
-    def dateTimeRangeWidget(self):
-        return self._dateTimeRangeWidget
-
-    # ------------------------------------------------------------------------
-    # dateTimeRangeWidget
+    # exceptionCommWidget
     # ------------------------------------------------------------------------
     @property
     def exceptionCommWidget(self):
         return self._exceptionCommWidget
+
+    # ------------------------------------------------------------------------
+    # statusIndicatorWidget
+    # ------------------------------------------------------------------------
+    @property
+    def statusIndicatorWidget(self):
+        return self._statusIndicatorWidget
 
     # ------------------------------------------------------------------------
     # timeAveragedCallBack
