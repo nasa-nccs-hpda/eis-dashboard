@@ -1,2 +1,7 @@
 python
 omegaconf
+xarray
+pandas
+rioxarray
+panel
+holoviews
