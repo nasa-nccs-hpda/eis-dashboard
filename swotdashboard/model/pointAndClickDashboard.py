@@ -111,6 +111,7 @@ class PointDashBoard(Dashboard):
                 df_ds.to_csv(f'{collectionID}_{variable}.csv')
 
             addTimeSeriesPlot = ds.hvplot('time',
+                                          title=f'{collectionID} {variable}',
                                           color=color,
                                           grid=True)
 

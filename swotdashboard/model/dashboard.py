@@ -76,6 +76,15 @@ class Dashboard(object):
         # with these options
         self._interactivityManager._timeSeriesVariablesWidget.options = \
             self._variableOptions
+        
+        self._validStarterVariables = [var for var in self._variableOptions \
+                                       if self.parseVariableOption(var)[1] not \
+                                        in self.BANNED_VARIABLES]
+
+        self._logger.debug(self._validStarterVariables)
+
+        self._interactivityManager._timeSeriesVariablesWidget.value = \
+            [self._validStarterVariables[0]]
 
     # ------------------------------------------------------------------------
     # initializeLogging
