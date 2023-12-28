@@ -1,6 +1,6 @@
-from .dashboard import Dashboard
-from .streams import ClickStream
-from . import utils
+from eisdashboard.model.dashboard import Dashboard
+from eisdashboard.model.streams import ClickStream
+from eisdashboard.model.utils import utils
 
 import random
 
@@ -104,7 +104,7 @@ class PointDashBoard(Dashboard):
             ds = utils.plotTS(rasterTS,
                               PointDashBoard.clickStream.param.lat,
                               PointDashBoard.clickStream.param.lon)
-            
+
             if exportToCSV:
                 self._logger.debug(f'Writing {collectVariableOption} to csv')
                 df_ds = ds.to_dataframe()
@@ -127,6 +127,11 @@ class PointDashBoard(Dashboard):
     # setStreamsAndBinds
     # -------------------------------------------------------------------------
     def setStreamsAndBinds(self):
+        """
+        Sets the "on interaction" binds. When an interaction is detected
+        the event is filtered (we only want click), we bind this to a
+        clickstream.
+        """
 
         # Streaming definitions.
         self._basemap.on_interaction(PointDashBoard.onMapInteractionCallback)

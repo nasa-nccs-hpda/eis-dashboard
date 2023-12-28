@@ -177,7 +177,7 @@ class Ingest(object):
 
         merra_dir = pathlib.Path(
             '/explore/nobackup/people/cssprad1/' +
-            'projects/swot-dashboard/data/merra')
+            'projects/eis-dashboard/data/merra')
         merra_files = merra_dir.glob('*.nc4')
 
         ingested_data = xr.open_mfdataset(merra_files)
@@ -193,7 +193,7 @@ if __name__ == '__main__':
     import datetime
 
     # END DEV ONLY
-    config = read_config('swot-dashboard/configs/test_config.yaml')
+    config = read_config('eis-dashboard/configs/dev_configs/test_config.yaml')
 
     date_beginning = datetime.datetime(2019, 5, 18)
     date_end = datetime.datetime(2019, 6, 18)
@@ -234,7 +234,7 @@ if __name__ == '__main__':
 
     search_dict = search_dict_polygon
 
-    config = read_config('swot-dashboard/configs/test_config.yaml')
+    config = read_config('eis-dashboard/configs/dev_configs/test_config.yaml')
     ingest = Ingest(config)
 
     print(ingest)

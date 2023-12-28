@@ -2,6 +2,7 @@ import sys
 import argparse
 import omegaconf
 from datetime import datetime
+
 from eisdashboard.model.config import Config
 
 

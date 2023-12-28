@@ -5,3 +5,4 @@ pandas
 rioxarray
 panel
 holoviews
+s3fs
