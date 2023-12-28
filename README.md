@@ -5,7 +5,7 @@ purpose: AWS-based dashboard for EIS projects
 
 # EIS Dashboard
 
-![Code style: PEP8](https://github.com/nasa-nccs-hpda/vhr-cloudmask/actions/workflows/lint.yml/badge.svg)
+![Code style: PEP8](https://github.com/nasa-nccs-hpda/eis-dashboard/actions/workflows/lint.yml/badge.svg)
 
 This application implements notebooks which make visualizing data from EarthData easier by allowing for user interaction with the data.
 
