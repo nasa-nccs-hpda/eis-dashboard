@@ -1,6 +1,6 @@
 from eisdashboard.model.dashboard import Dashboard
 from eisdashboard.model.streams import ClickStream
-from eisdashboard.model.utils import utils
+import eisdashboard.model.utils as utils
 
 import random
 

@@ -49,12 +49,12 @@ class Ingest(object):
                           pageSize=150,
                           maxPages=1)
 
-        resultList, providerID = cmrP.run()
+        resultList, providerID = None, None # cmrP.run()
 
         logging.info('Ingesting data')
 
         st = time.time()
-        data = self.ingest(providerID, resultList)
+        data = self.ingest_dummy(providerID, resultList)
         et = time.time()
         logging.info(f'Time to get data: {et-st}')
 
@@ -159,7 +159,7 @@ class Ingest(object):
         ingested_data = xr.open_mfdataset(s3_file_objects, combine='by_coords')
 
         return ingested_data
-
+    
     # ------------------------------------------------------------------------
     # ingest
     # ------------------------------------------------------------------------
@@ -173,7 +173,6 @@ class Ingest(object):
         Returns:
             _type_: _description_
         """
-        # _ = self._get_temp_credentials(provider_id)
 
         merra_dir = pathlib.Path(
             '/explore/nobackup/people/cssprad1/' +

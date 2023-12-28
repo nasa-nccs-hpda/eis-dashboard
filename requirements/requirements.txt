@@ -1,4 +1,3 @@
-python
 omegaconf
 xarray
 pandas

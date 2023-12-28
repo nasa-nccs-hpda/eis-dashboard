@@ -90,7 +90,6 @@ class CmrProcess(object):
     # Search the Common Metadata Repository(CMR) for a file that
     # is a temporal and spatial match.
     # -------------------------------------------------------------------------
-
     def _cmrQuery(self, pageNum=1):
 
         requestDictionary = self._buildRequest(pageNum=pageNum)
@@ -154,20 +153,22 @@ class CmrProcess(object):
                 self._error = True
                 return 0, None
 
-            requestResultData = json.loads(
-                requestResultPackage.data.decode('utf-8'))
+
             status = int(requestResultPackage.status)
 
-            if not status == 400:
-                totalHits = len(requestResultData['items'])
-                return totalHits, requestResultData
-
-            else:
+            if not status == 200:
                 msg = 'CMR Query: Client or server error: ' + \
                     'Status: {}, Request URL: {}, Params: {}'.format(
                         str(status), requestUrl, encodedParameters)
                 logging.error(msg)
                 return 0, None
+
+            else:
+                requestResultData = json.loads(
+                    requestResultPackage.data.decode('utf-8'))
+                totalHits = len(requestResultData['items'])
+                return totalHits, requestResultData
+
 
     # -------------------------------------------------------------------------
     # _processRequest
