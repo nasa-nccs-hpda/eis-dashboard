@@ -74,7 +74,8 @@ class TestIngest(unittest.TestCase):
     @patch('eisdashboard.model.data.ingest.Ingest.ingest')
     def test_get_data_from_bounds(self, mock_ingest, mock_cmr_process):
         # Mocking necessary objects
-        mock_cmr_process.return_value.run.return_value = ([], 'mock_provider_id')
+        mock_cmr_process.return_value.run.return_value = ([],
+                                                          'mock_provider_id')
         mock_ingest.return_value = MagicMock()
 
         # Creating a mock configuration

@@ -49,12 +49,12 @@ class Ingest(object):
                           pageSize=150,
                           maxPages=1)
 
-        resultList, providerID = None, None # cmrP.run()
+        resultList, providerID = cmrP.run()
 
         logging.info('Ingesting data')
 
         st = time.time()
-        data = self.ingest_dummy(providerID, resultList)
+        data = self.ingest(providerID, resultList)
         et = time.time()
         logging.info(f'Time to get data: {et-st}')
 
@@ -159,7 +159,7 @@ class Ingest(object):
         ingested_data = xr.open_mfdataset(s3_file_objects, combine='by_coords')
 
         return ingested_data
-    
+
     # ------------------------------------------------------------------------
     # ingest
     # ------------------------------------------------------------------------

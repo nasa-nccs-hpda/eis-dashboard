@@ -3,6 +3,7 @@ import unittest
 from eisdashboard.model.config import Config, Data
 from eisdashboard.model.config import Collections, Title, TimeBounds
 
+
 class TestConfig(unittest.TestCase):
 
     def test_default_values(self):
@@ -38,6 +39,7 @@ class TestConfig(unittest.TestCase):
         self.assertEqual(config.collections, collections)
         self.assertEqual(config.bounds, [[1, 2], [3, 4]])
         self.assertEqual(config.time_bounds, time_bounds)
+
 
 if __name__ == '__main__':
     unittest.main()

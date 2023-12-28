@@ -153,7 +153,6 @@ class CmrProcess(object):
                 self._error = True
                 return 0, None
 
-
             status = int(requestResultPackage.status)
 
             if not status == 200:
@@ -168,7 +167,6 @@ class CmrProcess(object):
                     requestResultPackage.data.decode('utf-8'))
                 totalHits = len(requestResultData['items'])
                 return totalHits, requestResultData
-
 
     # -------------------------------------------------------------------------
     # _processRequest

@@ -16,7 +16,8 @@ class TestInteractivityManager(unittest.TestCase):
         self._conf = read_config('configs/example_config.yaml')
 
     def test_init(self):
-        # Test if the initialization of InteractivityManager works without errors
+        # Test if the initialization of InteractivityManager
+        # works without errors
         im = InteractivityManager(conf=self._conf)
         self.assertIsInstance(im, InteractivityManager)
 
@@ -67,6 +68,7 @@ class TestInteractivityManager(unittest.TestCase):
 
         # Check if the target's disabled property is set correctly
         self.assertTrue(target.disabled)
+
 
 if __name__ == '__main__':
     unittest.main()
