@@ -1,5 +1,5 @@
-from swotdashboard.model.cmr_query import CmrProcess
-from swotdashboard.model.common import read_config
+from eisdashboard.model.cmr_query import CmrProcess
+from eisdashboard.model.common import read_config
 
 from functools import lru_cache
 import logging
@@ -173,11 +173,10 @@ class Ingest(object):
         Returns:
             _type_: _description_
         """
-        # _ = self._get_temp_credentials(provider_id)
 
         merra_dir = pathlib.Path(
             '/explore/nobackup/people/cssprad1/' +
-            'projects/swot-dashboard/data/merra')
+            'projects/eis-dashboard/data/merra')
         merra_files = merra_dir.glob('*.nc4')
 
         ingested_data = xr.open_mfdataset(merra_files)
@@ -193,7 +192,7 @@ if __name__ == '__main__':
     import datetime
 
     # END DEV ONLY
-    config = read_config('swot-dashboard/configs/test_config.yaml')
+    config = read_config('eis-dashboard/configs/dev_configs/test_config.yaml')
 
     date_beginning = datetime.datetime(2019, 5, 18)
     date_end = datetime.datetime(2019, 6, 18)
@@ -234,7 +233,7 @@ if __name__ == '__main__':
 
     search_dict = search_dict_polygon
 
-    config = read_config('swot-dashboard/configs/test_config.yaml')
+    config = read_config('eis-dashboard/configs/dev_configs/test_config.yaml')
     ingest = Ingest(config)
 
     print(ingest)

@@ -2,13 +2,14 @@ import sys
 import argparse
 import omegaconf
 from datetime import datetime
-from mypackage.model.config import Config
+
+from eisdashboard.model.config import Config
 
 
 # -------------------------------------------------------------------------
 # read_config
 # -------------------------------------------------------------------------
-def read_config(filename: str, config_class=Config):
+def read_config(filename: str, config_class=Config) -> omegaconf.OmegaConf:
     """
     Read configuration filename and initiate objects
     """
