@@ -1,0 +1,578 @@
+2024-01-03 11:26:29,826-DEBUG-dashboard:240-Computing center bounds given lons: [-76.6, -76.5], lats: [38.8, 38.9]
+2024-01-03 11:26:29,826-DEBUG-dashboard:257-(38.85, -76.55)
+2024-01-03 11:26:29,829-DEBUG-dashboard:132-Initializing data
+2024-01-03 11:26:29,830-DEBUG-dashboard:138-['GLDAS_NOAH025_3H']
+2024-01-03 11:26:29,830-DEBUG-dashboard:144-[{'spatialParameter': 'bounding_box', 'coords': [-76.6, 38.8, -76.5, 38.9], 'datetime': '2019-05-18T00:00:00Z,2019-06-18T00:00:00Z', 'collection_id': 'GLDAS_NOAH025_3H'}]
+2024-01-03 11:26:29,830-INFO-ingest:41-Querying CMR for data links: {'spatialParameter': 'bounding_box', 'coords': [-76.6, 38.8, -76.5, 38.9], 'datetime': '2019-05-18T00:00:00Z,2019-06-18T00:00:00Z', 'collection_id': 'GLDAS_NOAH025_3H'}
+2024-01-03 11:26:29,830-INFO-ingest:53-Ingesting data
+2024-01-03 11:26:31,325-INFO-ingest:58-Time to get data: 1.4942874908447266
+2024-01-03 11:26:31,326-INFO-ingest:60-Done ingesting data
+2024-01-03 11:26:31,327-DEBUG-dashboard:155-{'GLDAS_NOAH025_3H': ['lon', 'lat', 'time', 'BCANGSTR', 'BCCMASS', 'BCEXTTAU', 'BCFLUXU', 'BCFLUXV', 'BCSCATAU', 'BCSMASS', 'DMSCMASS', 'DMSSMASS', 'DUANGSTR', 'DUCMASS', 'DUCMASS25', 'DUEXTT25', 'DUEXTTAU', 'DUFLUXU', 'DUFLUXV', 'DUSCAT25', 'DUSCATAU', 'DUSMASS', 'DUSMASS25', 'OCANGSTR', 'OCCMASS', 'OCEXTTAU', 'OCFLUXU', 'OCFLUXV', 'OCSCATAU', 'OCSMASS', 'SO2CMASS', 'SO2SMASS', 'SO4CMASS', 'SO4SMASS', 'SSANGSTR', 'SSCMASS', 'SSCMASS25', 'SSEXTT25', 'SSEXTTAU', 'SSFLUXU', 'SSFLUXV', 'SSSCAT25', 'SSSCATAU', 'SSSMASS', 'SSSMASS25', 'SUANGSTR', 'SUEXTTAU', 'SUFLUXU', 'SUFLUXV', 'SUSCATAU', 'TOTANGSTR', 'TOTEXTTAU', 'TOTSCATAU']}
+2024-01-03 11:26:31,327-DEBUG-dashboard:163-Initializing variable options
+2024-01-03 11:26:31,327-DEBUG-dashboard:176-['GLDAS_NOAH025_3H:lon', 'GLDAS_NOAH025_3H:lat', 'GLDAS_NOAH025_3H:time', 'GLDAS_NOAH025_3H:BCANGSTR', 'GLDAS_NOAH025_3H:BCCMASS', 'GLDAS_NOAH025_3H:BCEXTTAU', 'GLDAS_NOAH025_3H:BCFLUXU', 'GLDAS_NOAH025_3H:BCFLUXV', 'GLDAS_NOAH025_3H:BCSCATAU', 'GLDAS_NOAH025_3H:BCSMASS', 'GLDAS_NOAH025_3H:DMSCMASS', 'GLDAS_NOAH025_3H:DMSSMASS', 'GLDAS_NOAH025_3H:DUANGSTR', 'GLDAS_NOAH025_3H:DUCMASS', 'GLDAS_NOAH025_3H:DUCMASS25', 'GLDAS_NOAH025_3H:DUEXTT25', 'GLDAS_NOAH025_3H:DUEXTTAU', 'GLDAS_NOAH025_3H:DUFLUXU', 'GLDAS_NOAH025_3H:DUFLUXV', 'GLDAS_NOAH025_3H:DUSCAT25', 'GLDAS_NOAH025_3H:DUSCATAU', 'GLDAS_NOAH025_3H:DUSMASS', 'GLDAS_NOAH025_3H:DUSMASS25', 'GLDAS_NOAH025_3H:OCANGSTR', 'GLDAS_NOAH025_3H:OCCMASS', 'GLDAS_NOAH025_3H:OCEXTTAU', 'GLDAS_NOAH025_3H:OCFLUXU', 'GLDAS_NOAH025_3H:OCFLUXV', 'GLDAS_NOAH025_3H:OCSCATAU', 'GLDAS_NOAH025_3H:OCSMASS', 'GLDAS_NOAH025_3H:SO2CMASS', 'GLDAS_NOAH025_3H:SO2SMASS', 'GLDAS_NOAH025_3H:SO4CMASS', 'GLDAS_NOAH025_3H:SO4SMASS', 'GLDAS_NOAH025_3H:SSANGSTR', 'GLDAS_NOAH025_3H:SSCMASS', 'GLDAS_NOAH025_3H:SSCMASS25', 'GLDAS_NOAH025_3H:SSEXTT25', 'GLDAS_NOAH025_3H:SSEXTTAU', 'GLDAS_NOAH025_3H:SSFLUXU', 'GLDAS_NOAH025_3H:SSFLUXV', 'GLDAS_NOAH025_3H:SSSCAT25', 'GLDAS_NOAH025_3H:SSSCATAU', 'GLDAS_NOAH025_3H:SSSMASS', 'GLDAS_NOAH025_3H:SSSMASS25', 'GLDAS_NOAH025_3H:SUANGSTR', 'GLDAS_NOAH025_3H:SUEXTTAU', 'GLDAS_NOAH025_3H:SUFLUXU', 'GLDAS_NOAH025_3H:SUFLUXV', 'GLDAS_NOAH025_3H:SUSCATAU', 'GLDAS_NOAH025_3H:TOTANGSTR', 'GLDAS_NOAH025_3H:TOTEXTTAU', 'GLDAS_NOAH025_3H:TOTSCATAU']
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,327-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,328-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,328-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,328-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,328-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,328-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,328-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,328-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,328-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,328-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,328-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,328-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,328-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,328-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,328-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,328-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,328-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,328-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,328-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,328-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,328-DEBUG-dashboard:85-['GLDAS_NOAH025_3H:BCANGSTR', 'GLDAS_NOAH025_3H:BCCMASS', 'GLDAS_NOAH025_3H:BCEXTTAU', 'GLDAS_NOAH025_3H:BCFLUXU', 'GLDAS_NOAH025_3H:BCFLUXV', 'GLDAS_NOAH025_3H:BCSCATAU', 'GLDAS_NOAH025_3H:BCSMASS', 'GLDAS_NOAH025_3H:DMSCMASS', 'GLDAS_NOAH025_3H:DMSSMASS', 'GLDAS_NOAH025_3H:DUANGSTR', 'GLDAS_NOAH025_3H:DUCMASS', 'GLDAS_NOAH025_3H:DUCMASS25', 'GLDAS_NOAH025_3H:DUEXTT25', 'GLDAS_NOAH025_3H:DUEXTTAU', 'GLDAS_NOAH025_3H:DUFLUXU', 'GLDAS_NOAH025_3H:DUFLUXV', 'GLDAS_NOAH025_3H:DUSCAT25', 'GLDAS_NOAH025_3H:DUSCATAU', 'GLDAS_NOAH025_3H:DUSMASS', 'GLDAS_NOAH025_3H:DUSMASS25', 'GLDAS_NOAH025_3H:OCANGSTR', 'GLDAS_NOAH025_3H:OCCMASS', 'GLDAS_NOAH025_3H:OCEXTTAU', 'GLDAS_NOAH025_3H:OCFLUXU', 'GLDAS_NOAH025_3H:OCFLUXV', 'GLDAS_NOAH025_3H:OCSCATAU', 'GLDAS_NOAH025_3H:OCSMASS', 'GLDAS_NOAH025_3H:SO2CMASS', 'GLDAS_NOAH025_3H:SO2SMASS', 'GLDAS_NOAH025_3H:SO4CMASS', 'GLDAS_NOAH025_3H:SO4SMASS', 'GLDAS_NOAH025_3H:SSANGSTR', 'GLDAS_NOAH025_3H:SSCMASS', 'GLDAS_NOAH025_3H:SSCMASS25', 'GLDAS_NOAH025_3H:SSEXTT25', 'GLDAS_NOAH025_3H:SSEXTTAU', 'GLDAS_NOAH025_3H:SSFLUXU', 'GLDAS_NOAH025_3H:SSFLUXV', 'GLDAS_NOAH025_3H:SSSCAT25', 'GLDAS_NOAH025_3H:SSSCATAU', 'GLDAS_NOAH025_3H:SSSMASS', 'GLDAS_NOAH025_3H:SSSMASS25', 'GLDAS_NOAH025_3H:SUANGSTR', 'GLDAS_NOAH025_3H:SUEXTTAU', 'GLDAS_NOAH025_3H:SUFLUXU', 'GLDAS_NOAH025_3H:SUFLUXV', 'GLDAS_NOAH025_3H:SUSCATAU', 'GLDAS_NOAH025_3H:TOTANGSTR', 'GLDAS_NOAH025_3H:TOTEXTTAU', 'GLDAS_NOAH025_3H:TOTSCATAU']
+2024-01-03 11:26:31,328-DEBUG-dashboard:265-Instantiating basemap, with center of (38.85, -76.55), size: 400x400px
+2024-01-03 11:26:31,345-DEBUG-drawPolygonDashboard:136-Setting streams and binds
+2024-01-03 11:26:31,345-DEBUG-dashboard:194-Getting titles
+2024-01-03 11:26:31,347-DEBUG-drawPolygonDashboard:61-Generating new time series from options:
+2024-01-03 11:26:31,347-DEBUG-drawPolygonDashboard:62-['GLDAS_NOAH025_3H:BCANGSTR']
+2024-01-03 11:26:31,348-DEBUG-dashboard:341-Updated status to :Updating time-series
+2024-01-03 11:26:31,348-DEBUG-dashboard:341-Updated status to :Adding time-series 1/1
+2024-01-03 11:26:31,348-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:26:31,351-DEBUG-utils:103-Polygon from coordinates: POLYGON ((-110.390625 39.878267, -88.242187 40.682859, -85.078125 -7.403143, -119.179688 2.06791, -110.390625 39.878267))
+2024-01-03 11:26:31,356-DEBUG-crs:92-Matched. confidence=100, c_code=b'4326', c_name=b'EPSG'
+2024-01-03 11:26:31,357-DEBUG-env:258-Entering env context: <rasterio.env.Env object at 0x14c207c628e0>
+2024-01-03 11:26:31,358-DEBUG-env:260-Starting outermost env
+2024-01-03 11:26:31,358-DEBUG-env:307-No GDAL environment exists
+2024-01-03 11:26:31,358-DEBUG-env:310-New GDAL environment <rasterio._env.GDALEnv object at 0x14c207c59d00> created
+2024-01-03 11:26:31,556-DEBUG-env:312-GDAL data files are available at built-in paths.
+2024-01-03 11:26:31,556-DEBUG-env:312-PROJ_LIB found in environment.
+2024-01-03 11:26:31,556-DEBUG-env:312-Started GDALEnv: self=<rasterio._env.GDALEnv object at 0x14c207c59d00>.
+2024-01-03 11:26:31,556-DEBUG-env:282-Entered env context: <rasterio.env.Env object at 0x14c207c628e0>
+2024-01-03 11:26:31,557-DEBUG-env:286-Exiting env context: <rasterio.env.Env object at 0x14c207c628e0>
+2024-01-03 11:26:31,557-DEBUG-env:347-Cleared existing <rasterio._env.GDALEnv object at 0x14c207c59d00> options
+2024-01-03 11:26:31,557-DEBUG-env:348-Stopped GDALEnv <rasterio._env.GDALEnv object at 0x14c207c59d00>.
+2024-01-03 11:26:31,557-DEBUG-env:292-Exiting outermost env
+2024-01-03 11:26:31,557-DEBUG-env:299-Exited env context: <rasterio.env.Env object at 0x14c207c628e0>
+2024-01-03 11:26:53,527-DEBUG-dashboard:341-Updated status to :Finished adding time-series
+2024-01-03 11:26:53,527-DEBUG-dashboard:347-Setting watchers; update time-series when changed
+2024-01-03 11:26:53,527-DEBUG-dashboard:207-Getting widget box
+2024-01-03 11:26:53,617-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:26:53,618-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:26:53,618-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:26:53,620-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:26:53,623-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:26:53,625-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:26:53,627-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:26:53,627-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:26:53,631-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:26:53,631-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:26:53,632-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:26:53,632-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:26:53,632-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:26:53,632-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:26:53,632-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:26:53,632-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:26:53,633-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:26:53,633-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:26:53,633-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:26:53,633-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:26:53,634-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:26:53,634-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:26:53,634-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:26:53,634-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:26:53,634-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:26:53,635-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:26:53,635-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:26:53,635-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:26:53,635-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:26:53,635-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:26:53,636-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:26:53,636-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:26:53,636-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:26:53,636-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:26:53,636-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:26:53,636-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:26:53,636-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:26:53,636-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:26:53,636-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:26:53,636-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:40:36,932-DEBUG-utils:103-Polygon from coordinates: POLYGON ((-80.549377 38.858103, -78.08844 38.883764, -77.539123 37.910834, -79.362854 37.266621, -80.428528 37.63294, -80.549377 38.858103))
+2024-01-03 11:40:36,936-DEBUG-crs:92-Matched. confidence=100, c_code=b'4326', c_name=b'EPSG'
+2024-01-03 11:40:36,937-DEBUG-env:258-Entering env context: <rasterio.env.Env object at 0x14c2073da640>
+2024-01-03 11:40:36,937-DEBUG-env:260-Starting outermost env
+2024-01-03 11:40:36,937-DEBUG-env:307-No GDAL environment exists
+2024-01-03 11:40:36,938-DEBUG-env:310-New GDAL environment <rasterio._env.GDALEnv object at 0x14c206f1a880> created
+2024-01-03 11:40:36,939-DEBUG-env:312-GDAL data files are available at built-in paths.
+2024-01-03 11:40:36,939-DEBUG-env:312-PROJ_LIB found in environment.
+2024-01-03 11:40:36,939-DEBUG-env:312-Started GDALEnv: self=<rasterio._env.GDALEnv object at 0x14c206f1a880>.
+2024-01-03 11:40:36,939-DEBUG-env:282-Entered env context: <rasterio.env.Env object at 0x14c2073da640>
+2024-01-03 11:40:36,939-DEBUG-env:286-Exiting env context: <rasterio.env.Env object at 0x14c2073da640>
+2024-01-03 11:40:36,940-DEBUG-env:347-Cleared existing <rasterio._env.GDALEnv object at 0x14c206f1a880> options
+2024-01-03 11:40:36,940-DEBUG-env:348-Stopped GDALEnv <rasterio._env.GDALEnv object at 0x14c206f1a880>.
+2024-01-03 11:40:36,940-DEBUG-env:292-Exiting outermost env
+2024-01-03 11:40:36,940-DEBUG-env:299-Exited env context: <rasterio.env.Env object at 0x14c2073da640>
+2024-01-03 11:40:52,351-DEBUG-utils:103-Polygon from coordinates: POLYGON ((-79.536255 41.131504, -78.964966 41.461665, -76.789673 41.642541, -76.152466 40.749754, -75.77893 39.912264, -79.536255 41.131504))
+2024-01-03 11:40:52,355-DEBUG-crs:92-Matched. confidence=100, c_code=b'4326', c_name=b'EPSG'
+2024-01-03 11:40:52,356-DEBUG-env:258-Entering env context: <rasterio.env.Env object at 0x14c206af20a0>
+2024-01-03 11:40:52,356-DEBUG-env:260-Starting outermost env
+2024-01-03 11:40:52,356-DEBUG-env:307-No GDAL environment exists
+2024-01-03 11:40:52,356-DEBUG-env:310-New GDAL environment <rasterio._env.GDALEnv object at 0x14c206a2db20> created
+2024-01-03 11:40:52,357-DEBUG-env:312-GDAL data files are available at built-in paths.
+2024-01-03 11:40:52,357-DEBUG-env:312-PROJ_LIB found in environment.
+2024-01-03 11:40:52,357-DEBUG-env:312-Started GDALEnv: self=<rasterio._env.GDALEnv object at 0x14c206a2db20>.
+2024-01-03 11:40:52,357-DEBUG-env:282-Entered env context: <rasterio.env.Env object at 0x14c206af20a0>
+2024-01-03 11:40:52,358-DEBUG-env:286-Exiting env context: <rasterio.env.Env object at 0x14c206af20a0>
+2024-01-03 11:40:52,358-DEBUG-env:347-Cleared existing <rasterio._env.GDALEnv object at 0x14c206a2db20> options
+2024-01-03 11:40:52,358-DEBUG-env:348-Stopped GDALEnv <rasterio._env.GDALEnv object at 0x14c206a2db20>.
+2024-01-03 11:40:52,358-DEBUG-env:292-Exiting outermost env
+2024-01-03 11:40:52,358-DEBUG-env:299-Exited env context: <rasterio.env.Env object at 0x14c206af20a0>
+2024-01-03 11:41:02,888-DEBUG-utils:103-Polygon from coordinates: POLYGON ((-76.7677 41.428724, -75.185669 40.549705, -77.163208 38.961972, -79.382446 38.996134, -76.7677 41.428724))
+2024-01-03 11:41:02,892-DEBUG-crs:92-Matched. confidence=100, c_code=b'4326', c_name=b'EPSG'
+2024-01-03 11:41:02,893-DEBUG-env:258-Entering env context: <rasterio.env.Env object at 0x14c206b15850>
+2024-01-03 11:41:02,893-DEBUG-env:260-Starting outermost env
+2024-01-03 11:41:02,893-DEBUG-env:307-No GDAL environment exists
+2024-01-03 11:41:02,893-DEBUG-env:310-New GDAL environment <rasterio._env.GDALEnv object at 0x14c207c38310> created
+2024-01-03 11:41:02,894-DEBUG-env:312-GDAL data files are available at built-in paths.
+2024-01-03 11:41:02,894-DEBUG-env:312-PROJ_LIB found in environment.
+2024-01-03 11:41:02,894-DEBUG-env:312-Started GDALEnv: self=<rasterio._env.GDALEnv object at 0x14c207c38310>.
+2024-01-03 11:41:02,894-DEBUG-env:282-Entered env context: <rasterio.env.Env object at 0x14c206b15850>
+2024-01-03 11:41:02,895-DEBUG-env:286-Exiting env context: <rasterio.env.Env object at 0x14c206b15850>
+2024-01-03 11:41:02,895-DEBUG-env:347-Cleared existing <rasterio._env.GDALEnv object at 0x14c207c38310> options
+2024-01-03 11:41:02,895-DEBUG-env:348-Stopped GDALEnv <rasterio._env.GDALEnv object at 0x14c207c38310>.
+2024-01-03 11:41:02,895-DEBUG-env:292-Exiting outermost env
+2024-01-03 11:41:02,895-DEBUG-env:299-Exited env context: <rasterio.env.Env object at 0x14c206b15850>
+2024-01-03 11:41:09,666-DEBUG-utils:103-Polygon from coordinates: POLYGON ((-80.744751 38.050686, -77.932251 38.223509, -78.020141 37.005185, -81.579712 37.320373, -80.744751 38.050686))
+2024-01-03 11:41:09,670-DEBUG-crs:92-Matched. confidence=100, c_code=b'4326', c_name=b'EPSG'
+2024-01-03 11:41:09,671-DEBUG-env:258-Entering env context: <rasterio.env.Env object at 0x14c207c8ae80>
+2024-01-03 11:41:09,671-DEBUG-env:260-Starting outermost env
+2024-01-03 11:41:09,671-DEBUG-env:307-No GDAL environment exists
+2024-01-03 11:41:09,671-DEBUG-env:310-New GDAL environment <rasterio._env.GDALEnv object at 0x14c2067fd6d0> created
+2024-01-03 11:41:09,672-DEBUG-env:312-GDAL data files are available at built-in paths.
+2024-01-03 11:41:09,672-DEBUG-env:312-PROJ_LIB found in environment.
+2024-01-03 11:41:09,672-DEBUG-env:312-Started GDALEnv: self=<rasterio._env.GDALEnv object at 0x14c2067fd6d0>.
+2024-01-03 11:41:09,672-DEBUG-env:282-Entered env context: <rasterio.env.Env object at 0x14c207c8ae80>
+2024-01-03 11:41:09,673-DEBUG-env:286-Exiting env context: <rasterio.env.Env object at 0x14c207c8ae80>
+2024-01-03 11:41:09,673-DEBUG-env:347-Cleared existing <rasterio._env.GDALEnv object at 0x14c2067fd6d0> options
+2024-01-03 11:41:09,673-DEBUG-env:348-Stopped GDALEnv <rasterio._env.GDALEnv object at 0x14c2067fd6d0>.
+2024-01-03 11:41:09,673-DEBUG-env:292-Exiting outermost env
+2024-01-03 11:41:09,673-DEBUG-env:299-Exited env context: <rasterio.env.Env object at 0x14c207c8ae80>
+2024-01-03 11:41:19,452-DEBUG-dashboard:369-Updating time-series with selected options, freezing all widgets
+2024-01-03 11:41:19,452-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:41:19,453-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:41:19,453-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:41:19,453-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:41:19,453-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:41:19,453-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:41:19,453-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:41:19,453-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:41:19,453-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:41:19,454-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:41:19,460-DEBUG-dashboard:341-Updated status to :Updating time-series with selected options, freezing all widgets
+2024-01-03 11:41:19,462-DEBUG-drawPolygonDashboard:61-Generating new time series from options:
+2024-01-03 11:41:19,462-DEBUG-drawPolygonDashboard:62-['GLDAS_NOAH025_3H:BCANGSTR', 'GLDAS_NOAH025_3H:DMSSMASS']
+2024-01-03 11:41:19,463-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:41:19,463-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:41:19,463-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:41:19,463-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:41:19,463-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:41:19,463-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:41:19,464-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:41:19,464-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:41:19,464-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:41:19,464-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:41:19,471-DEBUG-dashboard:341-Updated status to :Updating time-series
+2024-01-03 11:41:19,471-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:41:19,471-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:41:19,472-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:41:19,472-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:41:19,472-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:41:19,472-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:41:19,472-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:41:19,472-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:41:19,472-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:41:19,472-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:41:19,478-DEBUG-dashboard:341-Updated status to :Adding time-series 1/2
+2024-01-03 11:41:19,479-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:41:19,481-DEBUG-utils:103-Polygon from coordinates: POLYGON ((-80.744751 38.050686, -77.932251 38.223509, -78.020141 37.005185, -81.579712 37.320373, -80.744751 38.050686))
+2024-01-03 11:41:19,485-DEBUG-crs:92-Matched. confidence=100, c_code=b'4326', c_name=b'EPSG'
+2024-01-03 11:41:19,486-DEBUG-env:258-Entering env context: <rasterio.env.Env object at 0x14c207b938b0>
+2024-01-03 11:41:19,487-DEBUG-env:260-Starting outermost env
+2024-01-03 11:41:19,487-DEBUG-env:307-No GDAL environment exists
+2024-01-03 11:41:19,487-DEBUG-env:310-New GDAL environment <rasterio._env.GDALEnv object at 0x14c209d65880> created
+2024-01-03 11:41:19,487-DEBUG-env:312-GDAL data files are available at built-in paths.
+2024-01-03 11:41:19,487-DEBUG-env:312-PROJ_LIB found in environment.
+2024-01-03 11:41:19,488-DEBUG-env:312-Started GDALEnv: self=<rasterio._env.GDALEnv object at 0x14c209d65880>.
+2024-01-03 11:41:19,488-DEBUG-env:282-Entered env context: <rasterio.env.Env object at 0x14c207b938b0>
+2024-01-03 11:41:19,489-DEBUG-env:286-Exiting env context: <rasterio.env.Env object at 0x14c207b938b0>
+2024-01-03 11:41:19,489-DEBUG-env:347-Cleared existing <rasterio._env.GDALEnv object at 0x14c209d65880> options
+2024-01-03 11:41:19,489-DEBUG-env:348-Stopped GDALEnv <rasterio._env.GDALEnv object at 0x14c209d65880>.
+2024-01-03 11:41:19,489-DEBUG-env:292-Exiting outermost env
+2024-01-03 11:41:19,489-DEBUG-env:299-Exited env context: <rasterio.env.Env object at 0x14c207b938b0>
+2024-01-03 11:41:20,655-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:41:20,655-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:41:20,655-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:41:20,655-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:41:20,655-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:41:20,655-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:41:20,655-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:41:20,655-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:41:20,655-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:41:20,655-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:41:20,662-DEBUG-dashboard:341-Updated status to :Adding time-series 2/2
+2024-01-03 11:41:20,662-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:41:20,664-DEBUG-utils:103-Polygon from coordinates: POLYGON ((-80.744751 38.050686, -77.932251 38.223509, -78.020141 37.005185, -81.579712 37.320373, -80.744751 38.050686))
+2024-01-03 11:41:20,668-DEBUG-crs:92-Matched. confidence=100, c_code=b'4326', c_name=b'EPSG'
+2024-01-03 11:41:20,669-DEBUG-env:258-Entering env context: <rasterio.env.Env object at 0x14c206c8fc40>
+2024-01-03 11:41:20,669-DEBUG-env:260-Starting outermost env
+2024-01-03 11:41:20,669-DEBUG-env:307-No GDAL environment exists
+2024-01-03 11:41:20,669-DEBUG-env:310-New GDAL environment <rasterio._env.GDALEnv object at 0x14c206c69400> created
+2024-01-03 11:41:20,670-DEBUG-env:312-GDAL data files are available at built-in paths.
+2024-01-03 11:41:20,670-DEBUG-env:312-PROJ_LIB found in environment.
+2024-01-03 11:41:20,670-DEBUG-env:312-Started GDALEnv: self=<rasterio._env.GDALEnv object at 0x14c206c69400>.
+2024-01-03 11:41:20,670-DEBUG-env:282-Entered env context: <rasterio.env.Env object at 0x14c206c8fc40>
+2024-01-03 11:41:20,671-DEBUG-env:286-Exiting env context: <rasterio.env.Env object at 0x14c206c8fc40>
+2024-01-03 11:41:20,671-DEBUG-env:347-Cleared existing <rasterio._env.GDALEnv object at 0x14c206c69400> options
+2024-01-03 11:41:20,671-DEBUG-env:348-Stopped GDALEnv <rasterio._env.GDALEnv object at 0x14c206c69400>.
+2024-01-03 11:41:20,671-DEBUG-env:292-Exiting outermost env
+2024-01-03 11:41:20,671-DEBUG-env:299-Exited env context: <rasterio.env.Env object at 0x14c206c8fc40>
+2024-01-03 11:41:43,240-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:41:43,241-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:41:43,241-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:41:43,241-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:41:43,241-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:41:43,241-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:41:43,241-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:41:43,241-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:41:43,241-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:41:43,241-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:41:43,248-DEBUG-dashboard:341-Updated status to :Finished adding time-series
+2024-01-03 11:41:43,344-DEBUG-dashboard:404-Completed update, unfreezing widgets
+2024-01-03 11:41:43,344-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:41:43,344-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:41:43,344-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:41:43,345-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:41:43,345-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:41:43,345-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:41:43,345-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:41:43,345-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:41:43,345-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:41:43,345-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:41:43,354-DEBUG-dashboard:341-Updated status to :Completed update, unfreezing widgets
+2024-01-03 11:41:43,356-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:41:43,356-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:41:43,356-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:41:43,356-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:41:43,356-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:41:43,356-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:41:43,357-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:41:43,357-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:41:43,357-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:41:43,357-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:41:43,367-DEBUG-dashboard:341-Updated status to :Idle
+2024-01-03 11:41:51,625-DEBUG-utils:103-Polygon from coordinates: POLYGON ((-80.173462 39.064408, -75.669067 40.248507, -75.603149 38.240769, -78.415649 36.934964, -80.107544 37.320373, -80.173462 39.064408))
+2024-01-03 11:41:51,629-DEBUG-crs:92-Matched. confidence=100, c_code=b'4326', c_name=b'EPSG'
+2024-01-03 11:41:51,630-DEBUG-env:258-Entering env context: <rasterio.env.Env object at 0x14c20705c460>
+2024-01-03 11:41:51,630-DEBUG-env:260-Starting outermost env
+2024-01-03 11:41:51,630-DEBUG-env:307-No GDAL environment exists
+2024-01-03 11:41:51,630-DEBUG-env:310-New GDAL environment <rasterio._env.GDALEnv object at 0x14c20708c220> created
+2024-01-03 11:41:51,631-DEBUG-env:312-GDAL data files are available at built-in paths.
+2024-01-03 11:41:51,631-DEBUG-env:312-PROJ_LIB found in environment.
+2024-01-03 11:41:51,631-DEBUG-env:312-Started GDALEnv: self=<rasterio._env.GDALEnv object at 0x14c20708c220>.
+2024-01-03 11:41:51,631-DEBUG-env:282-Entered env context: <rasterio.env.Env object at 0x14c20705c460>
+2024-01-03 11:41:51,632-DEBUG-env:286-Exiting env context: <rasterio.env.Env object at 0x14c20705c460>
+2024-01-03 11:41:51,632-DEBUG-env:347-Cleared existing <rasterio._env.GDALEnv object at 0x14c20708c220> options
+2024-01-03 11:41:51,632-DEBUG-env:348-Stopped GDALEnv <rasterio._env.GDALEnv object at 0x14c20708c220>.
+2024-01-03 11:41:51,632-DEBUG-env:292-Exiting outermost env
+2024-01-03 11:41:51,632-DEBUG-env:299-Exited env context: <rasterio.env.Env object at 0x14c20705c460>
+2024-01-03 11:41:52,827-DEBUG-utils:103-Polygon from coordinates: POLYGON ((-80.173462 39.064408, -75.669067 40.248507, -75.603149 38.240769, -78.415649 36.934964, -80.107544 37.320373, -80.173462 39.064408))
+2024-01-03 11:41:52,831-DEBUG-crs:92-Matched. confidence=100, c_code=b'4326', c_name=b'EPSG'
+2024-01-03 11:41:52,832-DEBUG-env:258-Entering env context: <rasterio.env.Env object at 0x14c207202580>
+2024-01-03 11:41:52,832-DEBUG-env:260-Starting outermost env
+2024-01-03 11:41:52,832-DEBUG-env:307-No GDAL environment exists
+2024-01-03 11:41:52,832-DEBUG-env:310-New GDAL environment <rasterio._env.GDALEnv object at 0x14c20729b3a0> created
+2024-01-03 11:41:52,833-DEBUG-env:312-GDAL data files are available at built-in paths.
+2024-01-03 11:41:52,833-DEBUG-env:312-PROJ_LIB found in environment.
+2024-01-03 11:41:52,833-DEBUG-env:312-Started GDALEnv: self=<rasterio._env.GDALEnv object at 0x14c20729b3a0>.
+2024-01-03 11:41:52,833-DEBUG-env:282-Entered env context: <rasterio.env.Env object at 0x14c207202580>
+2024-01-03 11:41:52,834-DEBUG-env:286-Exiting env context: <rasterio.env.Env object at 0x14c207202580>
+2024-01-03 11:41:52,834-DEBUG-env:347-Cleared existing <rasterio._env.GDALEnv object at 0x14c20729b3a0> options
+2024-01-03 11:41:52,834-DEBUG-env:348-Stopped GDALEnv <rasterio._env.GDALEnv object at 0x14c20729b3a0>.
+2024-01-03 11:41:52,834-DEBUG-env:292-Exiting outermost env
+2024-01-03 11:41:52,834-DEBUG-env:299-Exited env context: <rasterio.env.Env object at 0x14c207202580>
+2024-01-03 11:41:54,087-DEBUG-utils:103-Polygon from coordinates: POLYGON ((-80.173462 39.064408, -75.669067 40.248507, -75.603149 38.240769, -78.415649 36.934964, -80.107544 37.320373, -80.173462 39.064408))
+2024-01-03 11:41:54,091-DEBUG-crs:92-Matched. confidence=100, c_code=b'4326', c_name=b'EPSG'
+2024-01-03 11:41:54,093-DEBUG-env:258-Entering env context: <rasterio.env.Env object at 0x14c206c2ae50>
+2024-01-03 11:41:54,093-DEBUG-env:260-Starting outermost env
+2024-01-03 11:41:54,093-DEBUG-env:307-No GDAL environment exists
+2024-01-03 11:41:54,093-DEBUG-env:310-New GDAL environment <rasterio._env.GDALEnv object at 0x14c206c696d0> created
+2024-01-03 11:41:54,093-DEBUG-env:312-GDAL data files are available at built-in paths.
+2024-01-03 11:41:54,094-DEBUG-env:312-PROJ_LIB found in environment.
+2024-01-03 11:41:54,094-DEBUG-env:312-Started GDALEnv: self=<rasterio._env.GDALEnv object at 0x14c206c696d0>.
+2024-01-03 11:41:54,094-DEBUG-env:282-Entered env context: <rasterio.env.Env object at 0x14c206c2ae50>
+2024-01-03 11:41:54,095-DEBUG-env:286-Exiting env context: <rasterio.env.Env object at 0x14c206c2ae50>
+2024-01-03 11:41:54,095-DEBUG-env:347-Cleared existing <rasterio._env.GDALEnv object at 0x14c206c696d0> options
+2024-01-03 11:41:54,095-DEBUG-env:348-Stopped GDALEnv <rasterio._env.GDALEnv object at 0x14c206c696d0>.
+2024-01-03 11:41:54,095-DEBUG-env:292-Exiting outermost env
+2024-01-03 11:41:54,095-DEBUG-env:299-Exited env context: <rasterio.env.Env object at 0x14c206c2ae50>
+2024-01-03 11:41:57,443-DEBUG-dashboard:369-Updating time-series with selected options, freezing all widgets
+2024-01-03 11:41:57,444-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:41:57,444-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:41:57,444-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:41:57,445-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:41:57,445-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:41:57,445-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:41:57,445-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:41:57,445-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:41:57,445-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:41:57,445-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:41:57,455-DEBUG-dashboard:341-Updated status to :Updating time-series with selected options, freezing all widgets
+2024-01-03 11:41:57,458-DEBUG-drawPolygonDashboard:61-Generating new time series from options:
+2024-01-03 11:41:57,458-DEBUG-drawPolygonDashboard:62-['GLDAS_NOAH025_3H:BCANGSTR', 'GLDAS_NOAH025_3H:DMSSMASS']
+2024-01-03 11:41:57,458-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:41:57,458-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:41:57,458-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:41:57,458-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:41:57,459-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:41:57,459-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:41:57,459-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:41:57,459-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:41:57,459-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:41:57,459-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:41:57,469-DEBUG-dashboard:341-Updated status to :Updating time-series
+2024-01-03 11:41:57,470-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:41:57,470-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:41:57,470-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:41:57,470-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:41:57,470-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:41:57,470-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:41:57,471-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:41:57,471-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:41:57,471-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:41:57,471-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:41:57,481-DEBUG-dashboard:341-Updated status to :Adding time-series 1/2
+2024-01-03 11:41:57,481-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:41:57,533-DEBUG-utils:103-Polygon from coordinates: POLYGON ((-80.173462 39.064408, -75.669067 40.248507, -75.603149 38.240769, -78.415649 36.934964, -80.107544 37.320373, -80.173462 39.064408))
+2024-01-03 11:41:57,537-DEBUG-crs:92-Matched. confidence=100, c_code=b'4326', c_name=b'EPSG'
+2024-01-03 11:41:57,538-DEBUG-env:258-Entering env context: <rasterio.env.Env object at 0x14c206dfc4f0>
+2024-01-03 11:41:57,538-DEBUG-env:260-Starting outermost env
+2024-01-03 11:41:57,538-DEBUG-env:307-No GDAL environment exists
+2024-01-03 11:41:57,538-DEBUG-env:310-New GDAL environment <rasterio._env.GDALEnv object at 0x14c20614fac0> created
+2024-01-03 11:41:57,539-DEBUG-env:312-GDAL data files are available at built-in paths.
+2024-01-03 11:41:57,539-DEBUG-env:312-PROJ_LIB found in environment.
+2024-01-03 11:41:57,539-DEBUG-env:312-Started GDALEnv: self=<rasterio._env.GDALEnv object at 0x14c20614fac0>.
+2024-01-03 11:41:57,539-DEBUG-env:282-Entered env context: <rasterio.env.Env object at 0x14c206dfc4f0>
+2024-01-03 11:41:57,539-DEBUG-env:286-Exiting env context: <rasterio.env.Env object at 0x14c206dfc4f0>
+2024-01-03 11:41:57,539-DEBUG-env:347-Cleared existing <rasterio._env.GDALEnv object at 0x14c20614fac0> options
+2024-01-03 11:41:57,539-DEBUG-env:348-Stopped GDALEnv <rasterio._env.GDALEnv object at 0x14c20614fac0>.
+2024-01-03 11:41:57,539-DEBUG-env:292-Exiting outermost env
+2024-01-03 11:41:57,540-DEBUG-env:299-Exited env context: <rasterio.env.Env object at 0x14c206dfc4f0>
+2024-01-03 11:41:58,730-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:41:58,730-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:41:58,730-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:41:58,730-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:41:58,730-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:41:58,730-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:41:58,730-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:41:58,730-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:41:58,730-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:41:58,731-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:41:58,740-DEBUG-dashboard:341-Updated status to :Adding time-series 2/2
+2024-01-03 11:41:58,741-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:41:58,753-DEBUG-utils:103-Polygon from coordinates: POLYGON ((-80.173462 39.064408, -75.669067 40.248507, -75.603149 38.240769, -78.415649 36.934964, -80.107544 37.320373, -80.173462 39.064408))
+2024-01-03 11:41:58,757-DEBUG-crs:92-Matched. confidence=100, c_code=b'4326', c_name=b'EPSG'
+2024-01-03 11:41:58,758-DEBUG-env:258-Entering env context: <rasterio.env.Env object at 0x14c207c38a00>
+2024-01-03 11:41:58,758-DEBUG-env:260-Starting outermost env
+2024-01-03 11:41:58,758-DEBUG-env:307-No GDAL environment exists
+2024-01-03 11:41:58,758-DEBUG-env:310-New GDAL environment <rasterio._env.GDALEnv object at 0x14c2061379a0> created
+2024-01-03 11:41:58,759-DEBUG-env:312-GDAL data files are available at built-in paths.
+2024-01-03 11:41:58,759-DEBUG-env:312-PROJ_LIB found in environment.
+2024-01-03 11:41:58,759-DEBUG-env:312-Started GDALEnv: self=<rasterio._env.GDALEnv object at 0x14c2061379a0>.
+2024-01-03 11:41:58,759-DEBUG-env:282-Entered env context: <rasterio.env.Env object at 0x14c207c38a00>
+2024-01-03 11:41:58,760-DEBUG-env:286-Exiting env context: <rasterio.env.Env object at 0x14c207c38a00>
+2024-01-03 11:41:58,760-DEBUG-env:347-Cleared existing <rasterio._env.GDALEnv object at 0x14c2061379a0> options
+2024-01-03 11:41:58,760-DEBUG-env:348-Stopped GDALEnv <rasterio._env.GDALEnv object at 0x14c2061379a0>.
+2024-01-03 11:41:58,760-DEBUG-env:292-Exiting outermost env
+2024-01-03 11:41:58,760-DEBUG-env:299-Exited env context: <rasterio.env.Env object at 0x14c207c38a00>
+2024-01-03 11:42:00,056-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:42:00,056-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:42:00,056-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:42:00,056-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:42:00,057-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:42:00,057-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:42:00,057-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:42:00,057-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:42:00,057-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:42:00,057-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:42:00,067-DEBUG-dashboard:341-Updated status to :Finished adding time-series
+2024-01-03 11:42:00,162-DEBUG-dashboard:404-Completed update, unfreezing widgets
+2024-01-03 11:42:00,162-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:42:00,162-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:42:00,163-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:42:00,163-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:42:00,163-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:42:00,163-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:42:00,163-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:42:00,163-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:42:00,163-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:42:00,163-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:42:00,172-DEBUG-dashboard:341-Updated status to :Completed update, unfreezing widgets
+2024-01-03 11:42:00,174-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:42:00,174-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:42:00,174-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:42:00,174-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:42:00,175-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:42:00,175-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:42:00,175-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:42:00,175-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:42:00,175-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:42:00,175-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:42:00,184-DEBUG-dashboard:341-Updated status to :Idle
+2024-01-03 11:54:18,112-DEBUG-dashboard:369-Updating time-series with selected options, freezing all widgets
+2024-01-03 11:54:18,114-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:54:18,114-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:54:18,114-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:54:18,114-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:54:18,114-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:54:18,114-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:54:18,114-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:54:18,114-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:54:18,114-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:54:18,114-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:54:18,125-DEBUG-dashboard:341-Updated status to :Updating time-series with selected options, freezing all widgets
+2024-01-03 11:54:18,127-DEBUG-drawPolygonDashboard:61-Generating new time series from options:
+2024-01-03 11:54:18,127-DEBUG-drawPolygonDashboard:62-['GLDAS_NOAH025_3H:BCANGSTR', 'GLDAS_NOAH025_3H:DMSSMASS']
+2024-01-03 11:54:18,128-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:54:18,128-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:54:18,128-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:54:18,128-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:54:18,128-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:54:18,128-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:54:18,129-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:54:18,129-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:54:18,129-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:54:18,129-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:54:18,139-DEBUG-dashboard:341-Updated status to :Updating time-series
+2024-01-03 11:54:18,140-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:54:18,140-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:54:18,140-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:54:18,140-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:54:18,141-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:54:18,141-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:54:18,141-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:54:18,141-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:54:18,141-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:54:18,141-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:54:18,151-DEBUG-dashboard:341-Updated status to :Adding time-series 1/2
+2024-01-03 11:54:18,151-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:54:18,162-DEBUG-drawPolygonDashboard:96-Writing GLDAS_NOAH025_3H:BCANGSTR to csv
+2024-01-03 11:54:18,164-DEBUG-utils:103-Polygon from coordinates: POLYGON ((-80.173462 39.064408, -75.669067 40.248507, -75.603149 38.240769, -78.415649 36.934964, -80.107544 37.320373, -80.173462 39.064408))
+2024-01-03 11:54:18,168-DEBUG-crs:92-Matched. confidence=100, c_code=b'4326', c_name=b'EPSG'
+2024-01-03 11:54:18,169-DEBUG-env:258-Entering env context: <rasterio.env.Env object at 0x14c2061bfdc0>
+2024-01-03 11:54:18,169-DEBUG-env:260-Starting outermost env
+2024-01-03 11:54:18,169-DEBUG-env:307-No GDAL environment exists
+2024-01-03 11:54:18,170-DEBUG-env:310-New GDAL environment <rasterio._env.GDALEnv object at 0x14c2061586d0> created
+2024-01-03 11:54:18,170-DEBUG-env:312-GDAL data files are available at built-in paths.
+2024-01-03 11:54:18,170-DEBUG-env:312-PROJ_LIB found in environment.
+2024-01-03 11:54:18,170-DEBUG-env:312-Started GDALEnv: self=<rasterio._env.GDALEnv object at 0x14c2061586d0>.
+2024-01-03 11:54:18,171-DEBUG-env:282-Entered env context: <rasterio.env.Env object at 0x14c2061bfdc0>
+2024-01-03 11:54:18,172-DEBUG-env:286-Exiting env context: <rasterio.env.Env object at 0x14c2061bfdc0>
+2024-01-03 11:54:18,172-DEBUG-env:347-Cleared existing <rasterio._env.GDALEnv object at 0x14c2061586d0> options
+2024-01-03 11:54:18,172-DEBUG-env:348-Stopped GDALEnv <rasterio._env.GDALEnv object at 0x14c2061586d0>.
+2024-01-03 11:54:18,172-DEBUG-env:292-Exiting outermost env
+2024-01-03 11:54:18,172-DEBUG-env:299-Exited env context: <rasterio.env.Env object at 0x14c2061bfdc0>
+2024-01-03 11:54:19,375-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:54:19,376-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:54:19,376-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:54:19,376-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:54:19,376-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:54:19,376-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:54:19,376-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:54:19,376-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:54:19,376-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:54:19,376-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:54:19,386-DEBUG-dashboard:341-Updated status to :Adding time-series 2/2
+2024-01-03 11:54:19,386-DEBUG-dashboard:184-Parsing variables and collectionID
+2024-01-03 11:54:19,396-DEBUG-drawPolygonDashboard:96-Writing GLDAS_NOAH025_3H:DMSSMASS to csv
+2024-01-03 11:54:19,398-DEBUG-utils:103-Polygon from coordinates: POLYGON ((-80.173462 39.064408, -75.669067 40.248507, -75.603149 38.240769, -78.415649 36.934964, -80.107544 37.320373, -80.173462 39.064408))
+2024-01-03 11:54:19,402-DEBUG-crs:92-Matched. confidence=100, c_code=b'4326', c_name=b'EPSG'
+2024-01-03 11:54:19,403-DEBUG-env:258-Entering env context: <rasterio.env.Env object at 0x14c207c603a0>
+2024-01-03 11:54:19,403-DEBUG-env:260-Starting outermost env
+2024-01-03 11:54:19,403-DEBUG-env:307-No GDAL environment exists
+2024-01-03 11:54:19,403-DEBUG-env:310-New GDAL environment <rasterio._env.GDALEnv object at 0x14c2060d6730> created
+2024-01-03 11:54:19,403-DEBUG-env:312-GDAL data files are available at built-in paths.
+2024-01-03 11:54:19,403-DEBUG-env:312-PROJ_LIB found in environment.
+2024-01-03 11:54:19,404-DEBUG-env:312-Started GDALEnv: self=<rasterio._env.GDALEnv object at 0x14c2060d6730>.
+2024-01-03 11:54:19,404-DEBUG-env:282-Entered env context: <rasterio.env.Env object at 0x14c207c603a0>
+2024-01-03 11:54:19,404-DEBUG-env:286-Exiting env context: <rasterio.env.Env object at 0x14c207c603a0>
+2024-01-03 11:54:19,404-DEBUG-env:347-Cleared existing <rasterio._env.GDALEnv object at 0x14c2060d6730> options
+2024-01-03 11:54:19,404-DEBUG-env:348-Stopped GDALEnv <rasterio._env.GDALEnv object at 0x14c2060d6730>.
+2024-01-03 11:54:19,404-DEBUG-env:292-Exiting outermost env
+2024-01-03 11:54:19,404-DEBUG-env:299-Exited env context: <rasterio.env.Env object at 0x14c207c603a0>
+2024-01-03 11:54:20,737-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:54:20,737-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:54:20,737-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:54:20,737-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:54:20,737-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:54:20,737-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:54:20,737-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:54:20,737-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:54:20,737-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:54:20,737-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:54:20,747-DEBUG-dashboard:341-Updated status to :Finished adding time-series
+2024-01-03 11:54:20,841-DEBUG-dashboard:404-Completed update, unfreezing widgets
+2024-01-03 11:54:20,841-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:54:20,841-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:54:20,842-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:54:20,842-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:54:20,842-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:54:20,842-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:54:20,842-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:54:20,842-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:54:20,842-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:54:20,842-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:54:20,851-DEBUG-dashboard:341-Updated status to :Completed update, unfreezing widgets
+2024-01-03 11:54:20,853-DEBUG-core:126-Successfully loaded extension "markdown.extensions.fenced_code.FencedCodeExtension".
+2024-01-03 11:54:20,853-DEBUG-core:126-Successfully loaded extension "markdown.extensions.footnotes.FootnoteExtension".
+2024-01-03 11:54:20,853-DEBUG-core:126-Successfully loaded extension "markdown.extensions.attr_list.AttrListExtension".
+2024-01-03 11:54:20,854-DEBUG-core:126-Successfully loaded extension "markdown.extensions.def_list.DefListExtension".
+2024-01-03 11:54:20,854-DEBUG-core:126-Successfully loaded extension "markdown.extensions.tables.TableExtension".
+2024-01-03 11:54:20,854-DEBUG-core:126-Successfully loaded extension "markdown.extensions.abbr.AbbrExtension".
+2024-01-03 11:54:20,854-DEBUG-core:126-Successfully loaded extension "markdown.extensions.md_in_html.MarkdownInHtmlExtension".
+2024-01-03 11:54:20,854-DEBUG-core:126-Successfully loaded extension "markdown.extensions.extra.ExtraExtension".
+2024-01-03 11:54:20,854-DEBUG-core:126-Successfully loaded extension "markdown.extensions.smarty.SmartyExtension".
+2024-01-03 11:54:20,854-DEBUG-core:126-Successfully loaded extension "markdown.extensions.codehilite.CodeHiliteExtension".
+2024-01-03 11:54:20,863-DEBUG-dashboard:341-Updated status to :Idle
