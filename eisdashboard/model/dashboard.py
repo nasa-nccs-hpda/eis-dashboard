@@ -32,7 +32,7 @@ class Dashboard(object):
 
     NCOLS: int = 2
 
-    BANNED_VARIABLES: list = ['lat', 'lon', 'time']
+    BANNED_VARIABLES: list = ['lat', 'lon', 'time', 'time_bnds']
 
     # ------------------------------------------------------------------------
     # __init__
