@@ -8,7 +8,7 @@ from typing import Tuple
 import logging
 import os
 
-from ipyleaflet import Map, basemaps
+from ipyleaflet import Map, basemaps, ScaleControl
 import ipywidgets as widgets
 import panel as pn
 
@@ -32,7 +32,7 @@ class Dashboard(object):
 
     NCOLS: int = 2
 
-    BANNED_VARIABLES: list = ['lat', 'lon', 'time']
+    BANNED_VARIABLES: list = ['lat', 'lon', 'time', 'time_bnds']
 
     # ------------------------------------------------------------------------
     # __init__
@@ -98,12 +98,15 @@ class Dashboard(object):
         formatter = logging.Formatter(
             '%(asctime)s-%(levelname)s-%(module)s:%(lineno)d-%(message)s')
 
-        # Create a logger with the specified log_level
-        log_level = getattr(logging, self._conf['log_level'].upper())
+        # Create a logger with default DEBUG log level
         logger = logging.getLogger()
-        logger.setLevel(log_level)
+        logger.setLevel('DEBUG')
 
-        # Create a console handler
+        # ---
+        # Create a console handler which overrides logging level
+        # according to user-sprecified level in config.
+        # ---
+        log_level = getattr(logging, self._conf['log_level'].upper())
         ch = logging.StreamHandler()
         ch.setLevel(log_level)
         ch.setFormatter(formatter)
@@ -113,7 +116,7 @@ class Dashboard(object):
             log_dir,
             f'eis-dashboard-log-{log_dt_str}.log')
         fh = logging.FileHandler(log_filename)
-        fh.setLevel(log_level)
+        fh.setLevel('DEBUG')
         fh.setFormatter(formatter)
 
         # Add the handler to the logger
@@ -270,6 +273,8 @@ class Dashboard(object):
             keyboard=True,
             layout=widgets.Layout(height='400px', width='800px'),
         )
+
+        base.add(ScaleControl(position='topright'))
 
         return base
 

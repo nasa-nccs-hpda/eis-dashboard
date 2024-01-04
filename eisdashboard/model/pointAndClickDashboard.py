@@ -39,6 +39,7 @@ class PointDashBoard(Dashboard):
     @staticmethod
     def onMapInteractionCallback(*args, **kwargs):
 
+        # Many events happen that call this, we only want click events
         if kwargs['type'] == 'click':
 
             lat, lon = kwargs['coordinates']
@@ -46,6 +47,7 @@ class PointDashBoard(Dashboard):
             # Update the marker position
             PointDashBoard.marker.location = (lat, lon)
 
+            # Triggers an event that updates the time-series plots
             PointDashBoard.clickStream.event(lat=lat, lon=lon)
 
             PointDashBoard.lastLocation = (lat, lon)
@@ -90,6 +92,7 @@ class PointDashBoard(Dashboard):
             collectionID, variable = self.parseVariableOption(
                 collectVariableOption)
 
+            # Variables such as time, lat, lon, etc.
             if variable in self.BANNED_VARIABLES:
                 continue
 
@@ -140,6 +143,8 @@ class PointDashBoard(Dashboard):
 
         lon = PointDashBoard.clickStream.param.lon
 
+        # We add another bind that automatically updates the title when a
+        # lat/lon is selected
         self._boundTitle = pn.bind(self.updateTitle, lat=lat, lon=lon)
 
     # -------------------------------------------------------------------------
@@ -152,13 +157,16 @@ class PointDashBoard(Dashboard):
         Defines and initializes streams, panel compenents
         that need to be defined closest to user invocation.
         """
+
         self._logger.debug('Setting streams and binds')
+
         self.setStreamsAndBinds()
 
-        # Partial dashboard initializations.
+        # Title initializing
         title, subtitle = self.getTitles()
         titleRow = pn.Row(pn.Column(title, subtitle))
 
+        # Error and status indicators initialization
         errorRow = pn.Row(
             self._interactivityManager.exceptionCommWidget,
         )

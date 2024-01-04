@@ -1,5 +1,4 @@
 from eisdashboard.model.cmr_query import CmrProcess
-from eisdashboard.model.common import read_config
 
 from functools import lru_cache
 import logging
@@ -163,7 +162,6 @@ class Ingest(object):
     # ------------------------------------------------------------------------
     # ingest
     # ------------------------------------------------------------------------
-    # @lru_cache(maxsize=32)
     def ingest_dummy(self, provider_id: str, s3_list: list) -> xr.DataArray:
         """_summary_
 
@@ -182,72 +180,3 @@ class Ingest(object):
         ingested_data = xr.open_mfdataset(merra_files)
 
         return ingested_data
-
-
-if __name__ == '__main__':
-
-    # DEV ONLY
-    import shapely
-    from shapely.geometry import Polygon
-    import datetime
-
-    # END DEV ONLY
-    config = read_config('eis-dashboard/configs/dev_configs/test_config.yaml')
-
-    date_beginning = datetime.datetime(2019, 5, 18)
-    date_end = datetime.datetime(2019, 6, 18)
-    datetimeStr = f"{date_beginning.isoformat()}Z," + \
-        f"{date_end.isoformat()}Z"
-    COLLECTID_ATL08_V5 = "GLDAS_NOAH025_3H"
-
-    search_dict_bbox = {
-        'spatialParameter': 'bounding_box',
-        'coords': [-76.6, 38.8, -76.5, 38.9],
-        'datetime': datetimeStr,
-        'collection_id': COLLECTID_ATL08_V5
-    }
-
-    search_dict_point = {
-        'spatialParameter': 'point',
-        'coords': [-76.6, 38.8],
-        'datetime': datetimeStr,
-        'collection_id': COLLECTID_ATL08_V5,
-    }
-
-    coords = [[[-80.622075, 38.104592], [-74.645512, 38.242781],
-               [-75.524418, 34.420806], [-81.3252, 34.130297],
-               [-80.622075, 38.104592]]]
-    polygon = Polygon(coords[0])
-    # this is important to get
-    poly = shapely.geometry.polygon.orient(polygon)
-    polygon_coords_str = [lat_or_lon for latlon in
-                          poly.exterior.coords for
-                          lat_or_lon in latlon]
-
-    search_dict_polygon = {
-        'spatialParameter': 'polygon',
-        'coords': polygon_coords_str,
-        'datetime': datetimeStr,
-        'collection_id': COLLECTID_ATL08_V5
-    }
-
-    search_dict = search_dict_polygon
-
-    config = read_config('eis-dashboard/configs/dev_configs/test_config.yaml')
-    ingest = Ingest(config)
-
-    print(ingest)
-
-    print("attempt 1")
-    st = time.time()
-    pkg = ingest.get_data_from_bounds(search_dict)
-    print(pkg)
-    et = time.time()
-    pkg['data'].close()
-    print(f'attempt 1 took {et - st}')
-    print('attempt 2')
-    st = time.time()
-    pkg = ingest.get_data_from_bounds(search_dict)
-    print(pkg)
-    et = time.time()
-    print(f'attempt 2: took {et - st}')
