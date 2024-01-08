@@ -53,17 +53,3 @@ class Config:
     log_level: str = 'INFO'
 
     log_dir: str = ''
-
-
-if __name__ == '__main__':
-
-    from eisdashboard.model.common import read_config
-
-    config_path: str = 'configs/dev_configs/test_no_nasaed.yaml'  # dev_configs/test_custom_config.yaml'
-
-    config = read_config(config_path)
-
-    print(config.custom_collections)
-
-    print(config.nasa_earthdata_collections)
-    print(bool(config.nasa_earthdata_collections['ids']))

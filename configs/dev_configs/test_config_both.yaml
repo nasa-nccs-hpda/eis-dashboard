@@ -21,5 +21,5 @@ title:
   subtitle: '## Alpha version: 0.3.0'
 
 # MUST BE 'INFO', 'WARN', 'DEBUG'
-log_level: 'DEBUG'
+log_level: 'INFO'
 log_dir: '.'

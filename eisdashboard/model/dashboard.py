@@ -184,7 +184,7 @@ class Dashboard(object):
             dataPackage = self._ingest.get_custom_s3_data(collectionID, s3Path)
 
             self._datasetsData[dataPackage['key']] = dataPackage['data']
- 
+
             self._datasetsVariables[dataPackage['key']] = \
                 dataPackage['variables']
 
