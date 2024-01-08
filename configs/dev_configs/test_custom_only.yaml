@@ -1,6 +1,7 @@
-nasa_earthdata_collections:
+custom_collections:
   ids:
-    - 'GLDAS_NOAH025_3H'
+    'CUSTOM_S3_TEST':
+     's3://veda-data-store-staging/EIS/zarr/gia/SESAW/SlrGRACE_NIMS.zarr'
 
 # Must be a bounding box
 bounds:

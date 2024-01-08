@@ -32,6 +32,12 @@ class Ingest(object):
         self.config = config
 
     # -------------------------------------------------------------------------
+    # get_nasa_earthdata
+    # -------------------------------------------------------------------------
+    def get_nasa_earthdata(self, query_package: dict) -> dict:
+        return self.get_data_from_bounds(query_package)
+
+    # -------------------------------------------------------------------------
     # get_data_from_bounds
     # -------------------------------------------------------------------------
     def get_data_from_bounds(self, query_package: dict) -> dict:
@@ -180,3 +186,52 @@ class Ingest(object):
         ingested_data = xr.open_mfdataset(merra_files)
 
         return ingested_data
+
+    # ------------------------------------------------------------------------
+    # get_custom_s3_data
+    # ------------------------------------------------------------------------
+    def get_custom_s3_data(self, collectionID: str,
+                           s3_path: str) -> xr.DataArray:
+
+        logging.info('Ingesting custom s3 data')
+
+        st = time.time()
+        data = self.ingest_custom_s3(s3_path)
+        et = time.time()
+        logging.info(f'Time to get data: {et-st}')
+
+        logging.info('Done ingesting custom s3 data')
+
+        return_dict = {'key': collectionID,
+                       'data': data,
+                       'variables': list(data.variables)}
+
+        return return_dict
+
+    # ------------------------------------------------------------------------
+    # ingest_custom_s3
+    # ------------------------------------------------------------------------
+    def ingest_custom_s3(self, s3_path: str) -> xr.DataArray:
+
+        logging.debug(f'Opening user-supplied s3 path: {s3_path}')
+
+        try:
+
+            ingested_data = xr.open_mfdataset([s3_path], engine='zarr')
+
+            return ingested_data
+
+        # ---
+        # Need to add more specific error handling
+        # - what happens when s3 doesn't exist
+        # - what happens if bad connection
+        # - what happens if it is not xarray compatible
+        # Note: this might need to change once we support raster ingesting
+        # ---
+        except Exception as e:
+
+            logging.error(f'Error opening {s3_path} into xarray data-array' +
+                          'make sure file exists and is xarray compatible.' +
+                          f' {e}')
+
+            raise e
