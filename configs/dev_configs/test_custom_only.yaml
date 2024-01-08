@@ -1,7 +1,9 @@
 custom_collections:
   ids:
-    'CUSTOM_S3_TEST':
+    'lrGRACE_NIMS':
      's3://veda-data-store-staging/EIS/zarr/gia/SESAW/SlrGRACE_NIMS.zarr'
+    'GRACE_0.5_DEGREE':
+     's3://dh-eis-sealevel-usw2-shared/zarr/GRACE/GSFC/gsfc.glb_.200204_202112_rl06v2.0_obp-ice6gd_halfdegree.zarr'
 
 # Must be a bounding box
 bounds:
