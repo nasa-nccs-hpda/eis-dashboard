@@ -6,7 +6,7 @@ import panel as pn
 # ------------------------------------------------------------------------
 class InteractivityManager(object):
     
-    RASTER_VAR_NAME : str = 'Vairables'
+    RASTER_VAR_NAME : str = 'Variables'
     RASTER_TIME_NAME : str = 'Time'
     
     TIME_SERIES_NAME: str = 'Time Series Variables'
