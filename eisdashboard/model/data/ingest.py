@@ -21,7 +21,7 @@ class Ingest(object):
 
     PROVIDER_CREDENTIAL_ENDPOINT: dict = {
         'GES_DISC': 'https://data.gesdisc.earthdata.nasa.gov/s3credentials',
-        'PODAAC': 'https://archive.podaac.earthdata.nasa.gov/s3credentials',
+        'POCLOUD': 'https://archive.podaac.earthdata.nasa.gov/s3credentials',
         'LPDAAC': 'https://data.lpdaac.earthdatacloud.nasa.gov/s3credentials',
         'ORNLDAAC': 'https://data.ornldaac.earthdata.nasa.gov/s3credentials',
         'GHRCDAAC': 'https://data.ghrc.earthdata.nasa.gov/s3credentials'
@@ -49,6 +49,10 @@ class Ingest(object):
                           maxPages=1)
 
         resultList, providerID = cmrP.run()
+        
+        if providerID == 'POCLOUD':
+            logging.info('Filtering PODAAC data path')
+            resultList = self._refine_podaac(resultList)
 
         logging.info('Ingesting data')
 
@@ -78,7 +82,7 @@ class Ingest(object):
         Returns:
             _type_: _description_
         """
-
+        
         requestUrl = self.PROVIDER_CREDENTIAL_ENDPOINT[provider]
 
         try:
@@ -180,3 +184,19 @@ class Ingest(object):
         ingested_data = xr.open_mfdataset(merra_files)
 
         return ingested_data
+    
+    
+    # ------------------------------------------------------------------------
+    # refine PODAAC CMR list
+    # ------------------------------------------------------------------------
+    def _refine_podaac(self, urls: list) -> list:
+        s3list = []
+        suffixes = ('.nc', '.nc4', '.hdf')
+        
+        for e in urls:
+            if e.endswith(suffixes):
+                s3path = '/'.join(['s3:/']+e.split('/')[3:])
+                s3list.append(s3path)
+                
+        return tuple(s3list)
+            
