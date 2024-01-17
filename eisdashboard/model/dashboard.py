@@ -339,9 +339,9 @@ class Dashboard(object):
         pass
 
     # ------------------------------------------------------------------------
-    # exeptionHandler
+    # exceptionHandler
     # ------------------------------------------------------------------------
-    def exeptionHandler(self, exception: Exception, step: str) -> None:
+    def exceptionHandler(self, exception: Exception, step: str) -> None:
         """Method that communicates to the user what exception was thrown
         and what step it occured at. This should update a warning message
         box in the dashboard view and return. The use case is that we don't
@@ -359,6 +359,16 @@ class Dashboard(object):
             f'<B>ERROR</b> {msg}'
 
         self._logger.error(msg)
+
+    # ------------------------------------------------------------------------
+    # resetExeptionCommWidget
+    # ------------------------------------------------------------------------
+    def resetExeptionCommWidget(self) -> None:
+        """Resets the interactivity manager back to normal"""
+
+        msg = ''
+
+        self._interactivityManager.exceptionCommWidget.object = msg
 
     # ------------------------------------------------------------------------
     # indicateStatus
@@ -400,6 +410,7 @@ class Dashboard(object):
     # ------------------------------------------------------------------------
     def updateTimeSeries(self, event):
 
+        self.resetExeptionCommWidget()
         statusMsg = 'Updating time-series with selected options, ' + \
             'freezing all widgets'
         self._logger.debug(statusMsg)
@@ -433,7 +444,7 @@ class Dashboard(object):
         # ---
         except Exception as exceptionCaptured:
             step = 'Updating the time series grid'
-            self.exeptionHandler(exceptionCaptured, step)
+            self.exceptionHandler(exceptionCaptured, step)
 
         statusMsg = 'Completed update, unfreezing widgets'
 

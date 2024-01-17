@@ -57,12 +57,12 @@ class PointDashBoard(Dashboard):
     # -------------------------------------------------------------------------
     def updateTitle(self, lat, lon):
 
-        ret = '## Point Selected: ({}, {})'.format(
+        ret = 'Point Selected: ({}, {})'.format(
             round(lat, 4), round(lon, 4))
 
         self._logger.debug(f'Setting title to: {ret}')
 
-        return pn.pane.Markdown(ret, width=400)
+        return pn.pane.Markdown(ret, width=500)
 
     # -------------------------------------------------------------------------
     # generateTimeSeriesGrid
@@ -201,7 +201,7 @@ class PointDashBoard(Dashboard):
         self.setWatchers()
 
         widgetBox = self.getWidgetBox()
-        baseMapRow = pn.Row(self._basemap, min_height=400,)
+        baseMapRow = pn.Row(self._basemap, min_height=400, min_width=800)
 
         baseMapCard = baseMapRow
         timeSeriesCard = pn.Card(self.timeSeriesColumn)

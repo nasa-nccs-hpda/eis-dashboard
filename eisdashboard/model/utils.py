@@ -32,8 +32,8 @@ def collapseTo1D(datarray):
 def collapseMean(datarray):
     """Load dat and collapse to averaged lat/lon"""
     # datarray = datarray.load()
-    dataCollapsed = datarray.mean(['lat']).compute()
-    dataCollapsed = dataCollapsed.mean(['lon']).compute()
+    dataCollapsed = datarray.mean(["lat"]).compute()
+    dataCollapsed = dataCollapsed.mean(["lon"]).compute()
     return dataCollapsed
 
 
@@ -42,31 +42,48 @@ def collapseMean(datarray):
 # -----------------------------------------------------------------------------
 def plotTS(datarray, lat, lon):
     """Plot time-series given a xarray dataarray and lat/lon"""
-    datarray = datarray.load()
-    dataSelected = datarray.interactive.sel(lon=lon,
-                                            lat=lat,
-                                            method='nearest')
+
+    try:
+        dataSelected = datarray.interactive.sel(lon=lon, lat=lat,
+                                                method="nearest")
+
+    except Exception as e:
+
+        msg = (
+            "Error attempting pixel selection with"
+            + f" lon {lon}, lat {lat}. Ensure DataArray"
+            + ' dimensions are in format "lat", "lon" and "time"'
+            + f' (case sensitive.) DataArray dimensions: {datarray.dims}'
+            + f' Original error: {e}'
+        )
+
+        logging.error(msg)
+
+        raise RuntimeError(msg)
+
     return dataSelected
 
 
 # -----------------------------------------------------------------------------
 # plotByIndex
 # -----------------------------------------------------------------------------
-def plotByIndex(shape,
-                index,
-                datarray,
-                collapse=False,
-                color='red',
-                title='test',
-                export=False,
-                path='.',
-                ylabel='test'):
+def plotByIndex(
+    shape,
+    index,
+    datarray,
+    collapse=False,
+    color="red",
+    title="test",
+    export=False,
+    path=".",
+    ylabel="test",
+):
     """Given an index for a shape, clip raster data to shape geometry"""
 
     if not index:
-        return '### Nothing selected'
+        return "### Nothing selected"
 
-    shape = gpd.GeoDataFrame(shape.loc[[index[0]], 'geometry'])
+    shape = gpd.GeoDataFrame(shape.loc[[index[0]], "geometry"])
 
     daLoaded = datarray  # .load()
 
@@ -77,8 +94,9 @@ def plotByIndex(shape,
     if export:
         daLoaded.to_pandas().to_csv(path)
 
-    timeSeriesPlot = daLoaded.hvplot('time', title=title, color=color,
-                                     ylabel=ylabel, grid=True)
+    timeSeriesPlot = daLoaded.hvplot(
+        "time", title=title, color=color, ylabel=ylabel, grid=True
+    )
 
     return timeSeriesPlot
 
@@ -86,27 +104,31 @@ def plotByIndex(shape,
 # -----------------------------------------------------------------------------
 # plotByPolygon
 # -----------------------------------------------------------------------------
-def plotByPolygon(polygonDict,
-                  datarray,
-                  collapse=True,
-                  color='red',
-                  title='test',
-                  export=False,
-                  path='.',
-                  ylabel='test'):
+def plotByPolygon(
+    polygonDict,
+    datarray,
+    collapse=True,
+    color="red",
+    title="test",
+    export=False,
+    path=".",
+    ylabel="test",
+):
     """Given an a polygon shape, clip raster data to shape geometry"""
 
-    coordinates = polygonDict['coordinates']
+    coordinates = polygonDict["coordinates"]
 
     polygon = Polygon(coordinates[0])
 
-    logging.debug(f'Polygon from coordinates: {polygon}')
+    logging.debug(f"Polygon from coordinates: {polygon}")
 
     try:
         datarrayClipped = clip_to_shape(datarray, polygon)
 
-        datarrayReadyToPlot = collapseTo1D(datarrayClipped) if collapse \
-            else collapseMean(datarrayClipped)
+        datarrayReadyToPlot = (
+            collapseTo1D(datarrayClipped) if collapse else
+            collapseMean(datarrayClipped)
+        )
 
     # ---
     # Catch the no-data in bounds exception explicitly.
@@ -115,9 +137,10 @@ def plotByPolygon(polygonDict,
     # pixel and return the time-series of that instead.
     # ---
     except rioxarray.exceptions.NoDataInBounds as noDataException:
-
-        warning_msg = 'Polygon smaller than pixel extent.' + \
-            f' Defaulting to entire pixel: {noDataException}'
+        warning_msg = (
+            "Polygon smaller than pixel extent."
+            + f" Defaulting to entire pixel: {noDataException}"
+        )
 
         logging.warning(warning_msg)
 
@@ -125,11 +148,11 @@ def plotByPolygon(polygonDict,
 
         lon, lat = centerPoint.x, centerPoint.y
 
-        logging.debug(f'Selecting lon ({lon}), lat ({lat})')
+        logging.debug(f"Selecting lon ({lon}), lat ({lat})")
 
         datarrayReadyToPlot = plotTS(datarray, lat, lon)
 
-        logging.info(f'Setting point selection to ({lon}, {lat}')
+        logging.info(f"Setting point selection to ({lon}, {lat})")
 
     # ---
     # Any other exceptions we gracefully handle through returning
@@ -137,19 +160,16 @@ def plotByPolygon(polygonDict,
     # be.
     # ---
     except Exception as e:
-
-        logging.error(f'Encountered unknown exception {e}. Try again.')
+        logging.error(f"Encountered unknown exception {e}. Try again.")
 
         return str(e)
 
     if export:
         datarrayReadyToPlot.to_pandas().to_csv(path)
 
-    timeSeriesPlot = datarrayReadyToPlot.hvplot('time',
-                                                title=title,
-                                                color=color,
-                                                ylabel=ylabel,
-                                                grid=True)
+    timeSeriesPlot = datarrayReadyToPlot.hvplot(
+        "time", title=title, color=color, ylabel=ylabel, grid=True
+    )
 
     return timeSeriesPlot
 
@@ -160,9 +180,9 @@ def plotByPolygon(polygonDict,
 def spatiallyAverageByIndex(shape, index, datarray, collapse):
     """Given an index for a shape, clip raster data to shape geometry"""
     if not index:
-        return '### Nothing selected'
+        return "### Nothing selected"
 
-    shape = gpd.GeoDataFrame(shape.loc[[index[0]], 'geometry'])
+    shape = gpd.GeoDataFrame(shape.loc[[index[0]], "geometry"])
     daLoaded = datarray.load()
     daLoaded = clip_to_shape(daLoaded, shape)
     daLoaded = collapseTo1D(daLoaded) if collapse else collapseMean(daLoaded)
@@ -197,11 +217,9 @@ def parseDate(dateString):
 # updateTitle
 # -------------------------------------------------------------------------
 def makeAllQueryPackages(collectionIDs: list, dateRange: tuple, coords: list):
-
     queryPackageForEachCollection = []
 
     for collection in collectionIDs:
-
         queryPackage = makeQueryPackage(dateRange, coords, collection)
 
         queryPackageForEachCollection.append(queryPackage)
@@ -213,14 +231,14 @@ def makeAllQueryPackages(collectionIDs: list, dateRange: tuple, coords: list):
 # updateTitle
 # -------------------------------------------------------------------------
 def makeQueryPackage(dateRange: tuple, coords: list, collectionID: str):
-
     dateBegin, dateEnd = dateRange
 
-    datetimeStr = f"{dateBegin.isoformat()}Z," + \
-        f"{dateEnd.isoformat()}Z"
+    datetimeStr = f"{dateBegin.isoformat()}Z," + f"{dateEnd.isoformat()}Z"
 
-    queryPackage = {'spatialParameter': 'bounding_box',
-                    'coords': coords,
-                    'datetime': datetimeStr,
-                    'collection_id': collectionID}
+    queryPackage = {
+        "spatialParameter": "bounding_box",
+        "coords": coords,
+        "datetime": datetimeStr,
+        "collection_id": collectionID,
+    }
     return queryPackage
