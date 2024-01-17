@@ -1,0 +1,22 @@
+# .coveragerc
+
+[run]
+# Include patterns specify which source files should be measured for coverage
+include =
+    eisdashboard/*
+
+# Exclude patterns specify which source files or paths should be excluded from coverage
+exclude =
+    tests/*
+    venv/*
+    setup.py
+
+# Omit some code constructs from coverage analysis
+omit =
+    *__init__*
+    *test*
+
+[report]
+# Show coverage report in terminal
+show_missing = true
+fail_under = 80
