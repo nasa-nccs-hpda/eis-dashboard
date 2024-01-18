@@ -10,7 +10,7 @@ class TestCommon(unittest.TestCase):
 
     def setUp(self):
         # Create a temporary config file for testing
-        self.temp_config_file = 'configs/example_config.yaml'
+        self.temp_config_file = 'configs/dev_configs/test_config_both.yaml'
 
     def test_read_config(self):
         # Test read_config function

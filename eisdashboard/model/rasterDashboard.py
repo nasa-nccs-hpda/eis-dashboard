@@ -1,12 +1,13 @@
 from eisdashboard.model.dashboard import Dashboard
 import panel as pn
+import hvplot.xarray
+assert hvplot.xarray
 
 
 # -----------------------------------------------------------------------------
 # rasterDashboard
 # Raster dashboard
 # -----------------------------------------------------------------------------
-
 class RasterDashboard(Dashboard):
 
     # -------------------------------------------------------------------------

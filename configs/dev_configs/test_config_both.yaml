@@ -1,0 +1,25 @@
+nasa_earthdata_collections:
+  ids:
+    - 'GLDAS_NOAH025_3H'
+
+custom_collections:
+  ids:
+    'SlrGRACE_NIMS':
+     's3://dh-eis-sealevel-usw2-shared/zarr/SESAW/SlrGRACE_NIMS.zarr'
+
+# Must be a bounding box
+bounds:
+  -  [-76.6, 38.8, -76.5, 38.9]
+
+# Must be in YYYY-MM-DD
+time_bounds:
+  start: '2019-05-18'
+  end: '2019-06-18'
+
+title:
+  title: '# EIS General Dashboard'
+  subtitle: '## Alpha version: 0.3.0'
+
+# MUST BE 'INFO', 'WARN', 'DEBUG'
+log_level: 'INFO'
+log_dir: '.'

@@ -13,7 +13,7 @@ class TestInteractivityManager(unittest.TestCase):
         # Mocking the Dashboard class for testing purposes
         self.dashboard_mock = MagicMock()
         self.dashboard_mock._conf = {'your_config_key': 'your_config_value'}
-        self._conf = read_config('configs/example_config.yaml')
+        self._conf = read_config('configs/dev_configs/test_config_both.yaml')
 
     def test_init(self):
         # Test if the initialization of InteractivityManager

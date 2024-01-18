@@ -1,5 +1,10 @@
-from typing import List
+from typing import List, Dict
 from dataclasses import dataclass, field
+
+
+@dataclass
+class CustomCollections:
+    ids: Dict[str, str] = field(default_factory=lambda: {})
 
 
 @dataclass
@@ -35,7 +40,11 @@ class Config:
 
     title: Title = field(default_factory=Title)
 
-    collections: Collections = field(default_factory=Collections)
+    nasa_earthdata_collections: Collections = \
+        field(default_factory=Collections)
+
+    custom_collections: CustomCollections = \
+        field(default_factory=CustomCollections)
 
     bounds: List[list] = field(default_factory=lambda: [])
 
