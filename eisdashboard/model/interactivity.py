@@ -5,10 +5,10 @@ import panel as pn
 # Interactivity
 # ------------------------------------------------------------------------
 class InteractivityManager(object):
-    
-    RASTER_VAR_NAME : str = 'Variables'
-    RASTER_TIME_NAME : str = 'Time'
-    
+
+    RASTER_VAR_NAME: str = 'Variables'
+    RASTER_TIME_NAME: str = 'Time'
+
     TIME_SERIES_NAME: str = 'Time Series Variables'
     TIME_AVE_SEQ_RADIO_NAME: str = 'Visualization Type'
     TIME_AVE_SEQ_RADIO_OPTS: list = ['Daily', 'Time Averaged']
@@ -37,12 +37,12 @@ class InteractivityManager(object):
             name=self.RASTER_VAR_NAME,
             value=[],
             options=[])
-        
+
         self._rasterTimeSelectWidget = pn.widgets.Select(
             name=self.RASTER_TIME_NAME,
             value=[],
             options=[])
-        
+
         self._timeSeriesVariablesWidget = pn.widgets.MultiChoice(
             name=self.TIME_SERIES_NAME,
             value=[],
@@ -81,21 +81,21 @@ class InteractivityManager(object):
             self._timeStepInputWidget,
             callbacks={
                 'value': self._timeAveragedCallBack})
-        
+
     # ------------------------------------------------------------------------
     # rasterVariableSelectWidget
     # ------------------------------------------------------------------------
     @property
     def rasterVariableSelectWidget(self):
-        return self._rasterVariableSelectWidget        
+        return self._rasterVariableSelectWidget
 
     # ------------------------------------------------------------------------
     # rasterTimeSelectWidget
     # ------------------------------------------------------------------------
     @property
     def rasterTimeSelectWidget(self):
-        return self._rasterTimeSelectWidget 
-    
+        return self._rasterTimeSelectWidget
+
     # ------------------------------------------------------------------------
     # timeSeriesVariableWidget
     # ------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-collections:
+nasa_earthdata_collections:
   ids:
     - 'VIIRS_NPP-NAVO-L2P-v3.0'
 

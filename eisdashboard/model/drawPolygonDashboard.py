@@ -172,6 +172,7 @@ class PolygonDrawDashboard(Dashboard):
         baseMapRow = pn.Row(
             self._basemap,
             min_height=400,
+            min_width=800,
         )
 
         baseMapCard = baseMapRow

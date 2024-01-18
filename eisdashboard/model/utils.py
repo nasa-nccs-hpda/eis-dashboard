@@ -10,6 +10,7 @@ import logging
 # -----------------------------------------------------------------------------
 def clip_to_shape(raster, geometry):
     """Given a raster and geometry, clip raster to the given geometry."""
+    raster = raster.load()
     raster.rio.set_spatial_dims(x_dim="lon", y_dim="lat", inplace=True)
     raster.rio.write_crs("epsg:4326", inplace=True)
     raster_clipped = raster.rio.clip([geometry], crs=4326, drop=True)
@@ -21,6 +22,7 @@ def clip_to_shape(raster, geometry):
 # -----------------------------------------------------------------------------
 def collapseTo1D(datarray):
     """Collapse lat/lon via sum given an xarray."""
+    datarray = datarray.load()
     dataCollapsed = datarray.sum(axis=1)
     dataCollapsed = dataCollapsed.sum(axis=1)
     return dataCollapsed
@@ -31,7 +33,7 @@ def collapseTo1D(datarray):
 # -----------------------------------------------------------------------------
 def collapseMean(datarray):
     """Load dat and collapse to averaged lat/lon"""
-    # datarray = datarray.load()
+    datarray = datarray.load()
     dataCollapsed = datarray.mean(["lat"]).compute()
     dataCollapsed = dataCollapsed.mean(["lon"]).compute()
     return dataCollapsed
@@ -42,6 +44,8 @@ def collapseMean(datarray):
 # -----------------------------------------------------------------------------
 def plotTS(datarray, lat, lon):
     """Plot time-series given a xarray dataarray and lat/lon"""
+
+    datarray = datarray.load()
 
     try:
         dataSelected = datarray.interactive.sel(lon=lon, lat=lat,
@@ -168,7 +172,7 @@ def plotByPolygon(
         datarrayReadyToPlot.to_pandas().to_csv(path)
 
     timeSeriesPlot = datarrayReadyToPlot.hvplot(
-        "time", title=title, color=color, ylabel=ylabel, grid=True
+        "time", title=title, color=color, grid=True
     )
 
     return timeSeriesPlot

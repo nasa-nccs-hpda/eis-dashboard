@@ -4,8 +4,8 @@ nasa_earthdata_collections:
 
 custom_collections:
   ids:
-    'IMERG_FWI':
-     's3://dh-eis-fire-usw2-shared/imerg-fwi.zarr'
+    'SlrGRACE_NIMS':
+     's3://dh-eis-sealevel-usw2-shared/zarr/SESAW/SlrGRACE_NIMS.zarr'
 
 # Must be a bounding box
 bounds:
