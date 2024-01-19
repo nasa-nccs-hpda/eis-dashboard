@@ -7,6 +7,8 @@ purpose: AWS-based dashboard for EIS projects
 
 ![Code style: PEP8](https://github.com/nasa-nccs-hpda/eis-dashboard/actions/workflows/lint.yml/badge.svg)
 
+Version: v0.3.0
+
 This application implements notebooks which make visualizing data from EarthData easier by allowing for user interaction with the data.
 
 ## Quickstart
