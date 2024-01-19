@@ -1,0 +1,20 @@
+nasa_earthdata_collections:
+  ids:
+    - 'VIIRS_NPP-NAVO-L2P-v3.0'
+
+# Must be a bounding box
+bounds:
+  -  [-163, 15, -153, 25]
+
+# Must be in YYYY-MM-DD
+time_bounds:
+  start: '2020-10-01'
+  end: '2020-10-02'
+
+title:
+  title: '# EIS General Dashboard'
+  subtitle: '## Alpha version: 0.3.0'
+
+# MUST BE 'INFO', 'WARN', 'DEBUG'
+log_level: 'INFO'
+log_dir: '.'

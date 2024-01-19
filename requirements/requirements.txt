@@ -1,7 +1,8 @@
-python
 omegaconf
 xarray
+zarr
 pandas
 rioxarray
 panel
 holoviews
+s3fs
