@@ -29,7 +29,7 @@ jobs:
           pip install -r requirements/requirements.txt
           pip install coveralls
       - name: Run tests
-        run: coverage run -m unittest -v
+        run: coverage run -m unittest discover tests -v
       - name: Submit coveralls
         if: github.event_name != 'pull_request'
         run: coveralls --service=github
