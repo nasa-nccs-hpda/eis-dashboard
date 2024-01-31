@@ -19,7 +19,7 @@ This application implements notebooks which make visualizing data from EarthData
 - Min requirements for memory is 4GB, ideally 8GB.
 
 ### EarthData credentials
-These notebooks access data via variou DAAC's s3 buckets, in order to do this you must first put your NASA EarthData credentials in your `~/.netrc` file.
+These notebooks access data via various DAAC's s3 buckets, in order to do this you must first put your NASA EarthData credentials in your `~/.netrc` file.
 
 To do this in daskhub, click File -> New -> Terminal and run the following command:
 
