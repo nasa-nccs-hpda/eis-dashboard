@@ -79,7 +79,7 @@ This notebook allows users to draw polygons inside the map and see spatially ave
 ### Raster viewer notebook
 Navigate and open this notebook in the file browser: `eis-dashboard/notebooks/eis-dashboard-raster.ipynb`
 
-This notebook allows users to view rasters inside the notebook. User the Variable widget to select which variables to view in the map viewer. Use the time-stamp widget to select which time stamp to view.
+This notebook allows users to view rasters inside the notebook. Use the "Variable" widget to select which variables to view in the map viewer. Use the time-stamp widget to select which time stamp to view.
 
 See `configs/dev_configs/example_config_raster.yaml` for an example configuration file to use with this notebook.
 
