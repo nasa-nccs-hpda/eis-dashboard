@@ -14,6 +14,9 @@ Version: v0.3.0
 
 This application implements notebooks which make visualizing data from EarthData easier by allowing for user interaction with the data.
 
+## Note
+These are basic notebooks to get started with. Feel free to fork this repo and add additional functionality as needed.
+
 ## Quickstart
 ### Navigate to your EIS project's daskhub
 - Min requirements for memory is 4GB, ideally 8GB.
