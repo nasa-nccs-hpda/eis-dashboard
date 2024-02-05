@@ -5,18 +5,24 @@ purpose: AWS-based dashboard for EIS projects
 
 # EIS Dashboard
 
+![CI Workflow](https://github.com/nasa-nccs-hpda/eis-dashboard/actions/workflows/ci.yml/badge.svg)
 ![Code style: PEP8](https://github.com/nasa-nccs-hpda/eis-dashboard/actions/workflows/lint.yml/badge.svg)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Coverage Status](https://coveralls.io/repos/github/nasa-nccs-hpda/eis-dashboard/badge.svg?branch=main)](https://coveralls.io/github/nasa-nccs-hpda/eis-dashboard?branch=main)
 
 Version: v0.3.0
 
 This application implements notebooks which make visualizing data from EarthData easier by allowing for user interaction with the data.
+
+## Note
+These are basic notebooks to get started with. Feel free to fork this repo and add additional functionality as needed.
 
 ## Quickstart
 ### Navigate to your EIS project's daskhub
 - Min requirements for memory is 4GB, ideally 8GB.
 
 ### EarthData credentials
-These notebooks access data via variou DAAC's s3 buckets, in order to do this you must first put your NASA EarthData credentials in your `~/.netrc` file.
+These notebooks access data via various DAAC's s3 buckets, in order to do this you must first put your NASA EarthData credentials in your `~/.netrc` file.
 
 To do this in daskhub, click File -> New -> Terminal and run the following command:
 
@@ -76,7 +82,7 @@ This notebook allows users to draw polygons inside the map and see spatially ave
 ### Raster viewer notebook
 Navigate and open this notebook in the file browser: `eis-dashboard/notebooks/eis-dashboard-raster.ipynb`
 
-This notebook allows users to view rasters inside the notebook. User the Variable widget to select which variables to view in the map viewer. Use the time-stamp widget to select which time stamp to view.
+This notebook allows users to view rasters inside the notebook. Use the "Variable" widget to select which variables to view in the map viewer. Use the time-stamp widget to select which time stamp to view.
 
 See `configs/dev_configs/example_config_raster.yaml` for an example configuration file to use with this notebook.
 
