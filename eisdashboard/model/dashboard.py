@@ -32,7 +32,8 @@ class Dashboard(object):
 
     NCOLS: int = 2
 
-    BANNED_VARIABLES: list = ['lat', 'lon', 'time', 'time_bnds']
+    BANNED_VARIABLES: list = ['lat', 'lon', 'time', 'time_bnds',
+                              'time_bounds', 'lat_bounds', 'lon_bounds']
 
     # ------------------------------------------------------------------------
     # __init__
@@ -79,7 +80,7 @@ class Dashboard(object):
 
         self._validStarterVariables = [
             var for var in self._variableOptions
-            if self.parseVariableOption(var)[1] not
+            if self.parseVariableOption(var)[1].lower() not
             in self.BANNED_VARIABLES]
 
         self._logger.debug(self._validStarterVariables)

@@ -2,6 +2,10 @@ import unittest
 from unittest.mock import patch, MagicMock
 import requests
 
+import xarray as xr
+import numpy as np
+import pandas as pd
+
 from eisdashboard.model.data.ingest import Ingest
 
 
@@ -98,6 +102,61 @@ class TestIngest(unittest.TestCase):
         self.assertEqual(result['key'], 'mock_collection_id')
         self.assertIsInstance(result['data'], MagicMock)
         self.assertIsInstance(result['variables'], list)
+
+    def test_rename_dims(self):
+        # dummy instance
+        ingest = Ingest(self.config)
+
+        # Create dummy data
+        latitude = np.linspace(-90, 90, 3)
+        longitude = np.linspace(-180, 180, 4)
+        time = pd.date_range("2024-01-01", periods=5, freq="D")
+
+        data = np.random.rand(len(time), len(latitude), len(longitude))
+
+        dataset = xr.Dataset(
+            {
+                "temperature": (["Time", "Latitude", "Longitude"], data),
+            },
+            coords={
+                "Latitude": latitude,
+                "Longitude": longitude,
+                "Time": time,
+            },
+        )
+
+        result_dataset = ingest.rename_dims(dataset)
+
+        expected_coords = ['time', 'lat', 'lon']
+        expected_dims = ['time', 'lat', 'lon']
+
+        self.assertTrue(list(result_dataset.coords.keys()) == expected_coords)
+        self.assertTrue(list(result_dataset.dims.keys()) == expected_dims)
+        
+    def test_refine_urls(self):
+        ingest = Ingest(self.config)
+
+        # Test case 1: URLs with proper suffixes and prefixes
+        urls_case1 = ['s3://example1.nc', 'http://archive.gov/example2.nc4',
+                      's3://example3.hdf']
+        expected_result_case1 = ('s3://example1.nc', 's3://example2.nc4',
+                                 's3://example3.hdf')
+        self.assertEqual(ingest._refine_urls(urls_case1),
+                         expected_result_case1)
+
+        # Test case 2: URLs with incorrect suffixes or prefixes
+        urls_case2 = ['s3://example4.txt', 'ftp://example5.nc',
+                      'http://archive.gov/example6.hdf.md5']
+        expected_result_case2 = ()
+        self.assertEqual(ingest._refine_urls(urls_case2),
+                         expected_result_case2)
+
+        # Test case 3: Empty list
+        urls_case3 = []
+        expected_result_case3 = ()
+        self.assertEqual(ingest._refine_urls(urls_case3),
+                         expected_result_case3)
+
 
 
 if __name__ == '__main__':
