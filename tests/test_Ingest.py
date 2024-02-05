@@ -132,7 +132,7 @@ class TestIngest(unittest.TestCase):
 
         self.assertTrue(list(result_dataset.coords.keys()) == expected_coords)
         self.assertTrue(list(result_dataset.dims.keys()) == expected_dims)
-        
+ 
     def test_refine_urls(self):
         ingest = Ingest(self.config)
 
@@ -156,7 +156,6 @@ class TestIngest(unittest.TestCase):
         expected_result_case3 = ()
         self.assertEqual(ingest._refine_urls(urls_case3),
                          expected_result_case3)
-
 
 
 if __name__ == '__main__':
