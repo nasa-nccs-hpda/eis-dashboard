@@ -7,11 +7,7 @@ import requests
 import s3fs
 import warnings
 import xarray as xr
-
-# DEV ONLY
-import pathlib
 import time
-# END DEV ONLY
 
 
 # -----------------------------------------------------------------------------
@@ -56,9 +52,8 @@ class Ingest(object):
 
         resultList, providerID = cmrP.run()
 
-        if providerID == 'POCLOUD':
-            logging.info('Filtering PODAAC data path')
-            resultList = self._refine_podaac(resultList)
+        logging.info('Filtering URL data paths')
+        resultList = self._refine_urls(resultList)
 
         logging.info('Ingesting data')
 
@@ -167,29 +162,55 @@ class Ingest(object):
 
         ingested_data = xr.open_mfdataset(s3_file_objects, combine='by_coords')
 
-        return ingested_data
+        logging.info('Checking if dims/coords need to be renamed')
 
-    # ------------------------------------------------------------------------
-    # ingest
-    # ------------------------------------------------------------------------
-    def ingest_dummy(self, provider_id: str, s3_list: list) -> xr.DataArray:
-        """_summary_
-
-        Raises:
-            ValueError: _description_
-
-        Returns:
-            _type_: _description_
-        """
-
-        merra_dir = pathlib.Path(
-            '/explore/nobackup/people/cssprad1/' +
-            'projects/eis-dashboard/data/merra')
-        merra_files = merra_dir.glob('*.nc4')
-
-        ingested_data = xr.open_mfdataset(merra_files)
+        ingested_data = self.rename_dims(ingested_data)
 
         return ingested_data
+
+    def rename_dims(self, dataset: xr.Dataset) -> xr.Dataset:
+
+        normalized_dim_names = {}
+        normalized_coords = {}
+
+        for dim in dataset.dims:
+            logging.debug(f'Checking dim: {dim}')
+            lowercase_dim = dim.lower()
+            if lowercase_dim == dim:
+                continue  # no change needed
+            if lowercase_dim in ["time", "lat", "lon"]:
+                normalized_dim_names[dim] = lowercase_dim
+            elif lowercase_dim in ["latitude", "longitude"]:
+                normalized_dim_names[dim] = lowercase_dim[:3]
+
+        for coord in dataset.coords:
+            logging.debug(f'Checking coord: {coord}')
+            lowercase_coord = coord.lower()
+            if lowercase_coord == coord:
+                continue  # no change needed
+            if lowercase_coord in ["time", "lat", "lon"]:
+                normalized_coords[coord] = lowercase_coord
+            elif lowercase_coord in ["latitude", "longitude"]:
+                normalized_coords[coord] = lowercase_coord[:3]
+
+        if normalized_dim_names:
+            logging.debug(f'Dim names: {normalized_dim_names}')
+            dataset = dataset.rename_dims(normalized_dim_names)
+        if normalized_coords:
+            logging.debug(f'Coord names: {normalized_coords}')
+            dataset = dataset.rename(normalized_coords)
+
+        if normalized_coords and normalized_dim_names:
+            updated_index_names = {dim_name: dim_name for dim_name in
+                                   normalized_dim_names.values()}
+            logging.debug(f'Setting indices to {updated_index_names}')
+            dataset = dataset.set_index(**updated_index_names)
+
+            updated_coord_names = list(normalized_coords.values())
+            logging.debug(f'Setting coords to {updated_coord_names}')
+            dataset = dataset.set_coords(updated_coord_names)
+
+        return dataset
 
     # ------------------------------------------------------------------------
     # get_custom_s3_data
@@ -241,15 +262,20 @@ class Ingest(object):
             raise e
 
     # ------------------------------------------------------------------------
-    # refine PODAAC CMR list
+    # refine CMR URL list
     # ------------------------------------------------------------------------
-    def _refine_podaac(self, urls: list) -> list:
+    def _refine_urls(self, urls: list) -> list:
         s3list = []
         suffixes = ('.nc', '.nc4', '.hdf')
+        s3Prefix = 's3://'
 
         for e in urls:
             if e.endswith(suffixes):
-                s3path = '/'.join(['s3:/']+e.split('/')[3:])
-                s3list.append(s3path)
+                if e.startswith(s3Prefix):
+                    s3path = e
+                    s3list.append(s3path)
+                elif e.startswith('http'):
+                    s3path = '/'.join(['s3:/']+e.split('/')[3:])
+                    s3list.append(s3path)
 
         return tuple(s3list)
